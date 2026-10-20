@@ -518,7 +518,7 @@
     { icon: "▣", label: "Screenshot tour", hint: "Section", run: go("#tour") },
     { icon: "✋", label: "Touch, pen & shortcuts", hint: "Section", run: go("#touch") },
     { icon: "⬇", label: "Download ClassBoard", hint: "Section", run: go("#download") },
-    { icon: "📘", label: "Guides & how-to", hint: "Section", run: go("#guide") },
+    { icon: "📘", label: "Guides & manual", hint: "Section", run: go("#guide") },
     { icon: "🧭", label: "How to use ClassBoard", hint: "PDF", run: open_("guides/ClassBoard-How-to-use.pdf") },
     { icon: "📖", label: "Read the guide", hint: "PDF", run: open_("guides/ClassBoard-Guide.pdf") },
     { icon: "🖨", label: "Print the ink-saver guide", hint: "PDF", run: open_("guides/ClassBoard-Guide-InkSaver.pdf") },
