@@ -660,13 +660,19 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
 .guide-body p { margin: 0; color: var(--muted); font-size: .95rem; }
 .guide-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 0; font-size: .82rem; color: var(--muted); }
 .guide-meta li::before { content: "•"; color: var(--accent); margin-right: 6px; }
-.guide-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.guide-actions .btn { min-height: 44px; padding: 0 14px; gap: 8px; font-size: .9rem; border-radius: 12px; }
+.guide-actions { display: flex; flex-wrap: nowrap; gap: 8px; margin-top: 8px; max-width: 100%; }
+.guide-actions .btn { min-height: 44px; padding: 0 14px; gap: 8px; font-size: .9rem; border-radius: 12px; white-space: nowrap; flex: 0 1 auto; min-width: 0; }
+@media (max-width: 1180px) {
+  .guides { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+}
+@media (max-width: 420px) {
+  .guide-actions .btn { padding: 0 10px; gap: 6px; font-size: .84rem; }
+  .guide-actions .btn svg { display: none; }
+}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .bento { grid-template-columns: 1fr 1fr; }
-  .guides { grid-template-columns: 1fr; }
   .hero-grid, .two-col { grid-template-columns: 1fr; gap: 44px; }
   .hero { padding-top: 48px; }
   .board { transform: none; }
@@ -700,7 +706,7 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
   .guide-card { grid-template-columns: 1fr; justify-items: center; }
   .paper { width: 62%; margin-bottom: 8px; }
   .guide-body { align-items: stretch; }
-  .guide-actions .btn { flex: 1 1 auto; }
+  .guide-actions .btn { flex: 1 1 0; }
   .tile-graph { grid-column: auto; grid-row: auto; }
   .to-top { right: 14px; bottom: 14px; }
 }
