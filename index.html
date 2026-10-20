@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ClassBoard — the open-source digital whiteboard for classrooms</title>
+  <meta name="description" content="ClassBoard is a free, open-source digital whiteboard for large interactive classroom displays. Ten-point touch, geometry instruments, equations, graphs, PDF and PowerPoint import. Windows 10/11, fully offline.">
+  <meta name="theme-color" content="#141816">
+  <meta property="og:title" content="ClassBoard — the open-source digital whiteboard for classrooms">
+  <meta property="og:description" content="Ten-point touch, geometry instruments, equations and graphs. Free, offline, made for interactive classroom displays.">
+  <meta property="og:image" content="assets/img/more-popover.png">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="top">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="ClassBoard home">
+        <img src="assets/img/logo.svg" alt="" width="32" height="32">
+        <span>ClassBoard</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="nav-links" class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#tour">Tour</a>
+        <a href="#touch">Touch</a>
+        <a href="#download">Download</a>
+        <a href="#build">Build</a>
+        <a class="gh" href="https://github.com/An0nym0us-glitch/Smart-board" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="dot"></span> <span data-version>Latest release</span> · Free &amp; open source</p>
+          <h1>The whiteboard your<br><span class="chalk">classroom deserves.</span></h1>
+          <p class="lead">ClassBoard is a digital whiteboard built for large interactive classroom displays.
+            Ten-point touch, real geometry instruments, equations and graphs — all fully offline on Windows&nbsp;10/11.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/latest" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10 4.5v7H3zm0 13 7 1v-7H3zM11 4.4 21 3v8.5H11zm0 15.2L21 21v-8.5H11z"/></svg>
+              Download for Windows
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/An0nym0us-glitch/Smart-board" target="_blank" rel="noopener">View source</a>
+          </div>
+          <ul class="hero-meta">
+            <li>Windows 10 / 11 · x64</li>
+            <li>Works fully offline</li>
+            <li>MIT licensed</li>
+          </ul>
+        </div>
+
+        <div class="hero-board" aria-hidden="true">
+          <div class="board">
+            <svg class="board-svg" viewBox="0 0 600 380">
+              <defs>
+                <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+                  <path d="M30 0H0V30" fill="none" stroke="rgba(233,238,235,.06)" stroke-width="1"/>
+                </pattern>
+              </defs>
+              <rect width="600" height="380" fill="url(#grid)"/>
+              <!-- axes -->
+              <g class="draw d1" stroke="#9aa7a0" stroke-width="2" fill="none">
+                <path d="M40 300 H 330"/><path d="M60 330 V 60"/>
+              </g>
+              <!-- parabola -->
+              <path class="draw d2" d="M80 90 Q 195 470 310 90" stroke="#5fd3a5" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <!-- triangle -->
+              <path class="draw d3" d="M390 300 L 540 300 L 390 150 Z" stroke="#f5f5f0" stroke-width="3.5" fill="rgba(79,179,255,.08)" stroke-linejoin="round"/>
+              <path class="draw d4" d="M390 280 h20 v20" stroke="#f5f5f0" stroke-width="2" fill="none"/>
+              <!-- angle arc -->
+              <path class="draw d5" d="M505 300 A 35 35 0 0 0 515 275" stroke="#ffb454" stroke-width="3" fill="none"/>
+              <!-- highlighter swoosh -->
+              <path class="draw d6 magic" d="M370 90 C 420 60, 480 120, 560 80" stroke="#ffe066" stroke-width="16" stroke-linecap="round" fill="none" opacity=".55"/>
+            </svg>
+            <div class="board-label l1">y = x² − 4</div>
+            <div class="board-label l2">45°</div>
+            <div class="board-label l3">x = <span class="frac"><span>−b ± √(b²−4ac)</span><span>2a</span></span></div>
+            <div class="ribbon-mini">
+              <span class="rb on">✎</span><span class="rb">⌫</span><span class="rb">⬚</span><span class="rb sep"></span><span class="rb">↶</span><span class="rb">↷</span><span class="rb grow"></span><span class="rb pg">1 / 3</span><span class="rb">⛶</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STRIP -->
+    <section class="strip">
+      <div class="wrap strip-grid">
+        <div><strong>10</strong><span>touch points at once</span></div>
+        <div><strong>15+</strong><span>shapes &amp; constructions</span></div>
+        <div><strong>4</strong><span>real geometry instruments</span></div>
+        <div><strong>0</strong><span>internet required</span></div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section" id="features">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Everything on the board</p>
+          <h2>Built for teaching, not for menus.</h2>
+          <p>The board fills the screen. The most-used commands sit in a ribbon along the bottom, and everything else opens as a popover right next to the button — so you stay on the board.</p>
+        </header>
+
+        <div class="features">
+          <article class="card">
+            <div class="ico">✎</div>
+            <h3>Ink that feels right</h3>
+            <p>Smooth pen, highlighter, dashed and dotted ink with stylus pressure. Optional shape recognition turns rough circles, lines and triangles into clean shapes.</p>
+          </article>
+          <article class="card">
+            <div class="ico">✨</div>
+            <h3>Magic Highlighter</h3>
+            <p>Point things out while you explain. Marks fade away by themselves after about five seconds and are never saved or undone.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⌫</div>
+            <h3>Wipe like a real board</h3>
+            <p>Stroke, object and area erasers — or just wipe with three fingers or the flat of your hand. One wipe, one undo step.</p>
+          </article>
+          <article class="card">
+            <div class="ico">📐</div>
+            <h3>Real instruments</h3>
+            <p>Ruler, protractor with an angle stamp, 45° and 30/60° set squares, and a compass that draws arcs and circles.</p>
+          </article>
+          <article class="card">
+            <div class="ico">∠</div>
+            <h3>Live geometry</h3>
+            <p>Distance, angle, slope and area measurements that update as you move points. Snap to points and the grid. Set a scale like 10&nbsp;cm&nbsp;=&nbsp;1&nbsp;km.</p>
+          </article>
+          <article class="card">
+            <div class="ico">∑</div>
+            <h3>Equations</h3>
+            <p>LaTeX-style input with a symbol palette and live preview: fractions, roots, integrals, sums, limits, matrices. The ✨ Magic Equation Maker turns handwriting into an editable formula — offline.</p>
+          </article>
+          <article class="card">
+            <div class="ico">ƒ</div>
+            <h3>Function graphs</h3>
+            <p>Plot several functions with automatic sliders for a, b, c…, zoom and pan, points that snap onto curves, vectors and value tables.</p>
+          </article>
+          <article class="card">
+            <div class="ico">▤</div>
+            <h3>Pages &amp; templates</h3>
+            <p>Thumbnail navigator with drag-to-reorder. 16:9, 4:3, A4, A3 or custom sizes. Blackboard, grid, dots, ruled, music staves, coordinate plane or your own image.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⇅</div>
+            <h3>Import &amp; export</h3>
+            <p>Export vector PDF, PowerPoint .pptx and PNG. Import PDFs, images, other lessons and .ppt / .pptx slides — each becomes a page.</p>
+          </article>
+          <article class="card">
+            <div class="ico">💾</div>
+            <h3>Never lose a lesson</h3>
+            <p>Versioned <code>.classboard</code> files with atomic saves, autosave and crash recovery. One undo history across every tool.</p>
+          </article>
+          <article class="card">
+            <div class="ico">T</div>
+            <h3>Text, images, tables</h3>
+            <p>Formatted text boxes, drag-and-drop or pasted images, and tables you can edit right on the board.</p>
+          </article>
+          <article class="card">
+            <div class="ico">⌁</div>
+            <h3>Fully offline</h3>
+            <p>No account, no cloud, no tracking. Everything — including handwriting recognition — runs on the classroom PC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOUR -->
+    <section class="section section-alt" id="tour">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Take a tour</p>
+          <h2>See it on the board.</h2>
+        </header>
+
+        <div class="tour">
+          <div class="tabs" role="tablist" aria-label="Screenshots">
+            <button role="tab" aria-selected="true"  aria-controls="shot" data-src="assets/img/more-popover.png"   data-cap="MORE opens every tool in one touch-friendly popover, right where your hand is.">More menu</button>
+            <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/pen-popover.png"    data-cap="Pick pen style, thickness and colour. Turn on pressure or shape recognition.">Pen</button>
+            <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/instruments.png"    data-cap="Ruler, protractor, set square and compass lie on the board and draw along their edges.">Instruments</button>
+            <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/equation.png"       data-cap="Type LaTeX or tap the palette — the preview updates live and stays editable.">Equation</button>
+            <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/function-graph.png" data-cap="Plot functions with automatic parameter sliders, zoom, pan and value tables.">Graph</button>
+          </div>
+          <figure class="shot-frame" id="shot" role="tabpanel">
+            <div class="window-bar"><i></i><i></i><i></i><span>ClassBoard</span></div>
+            <img id="shot-img" src="assets/img/more-popover.png" alt="ClassBoard screenshot: the MORE popover" width="1600" height="1000">
+            <figcaption id="shot-cap">MORE opens every tool in one touch-friendly popover, right where your hand is.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOUCH -->
+    <section class="section" id="touch">
+      <div class="wrap two-col">
+        <div>
+          <p class="kicker">Touch, pen &amp; mouse</p>
+          <h2>Several students. One board. No fighting.</h2>
+          <p>Every finger that touches the board writes its own line, so a whole group can work at the same time. Two fingers of one hand still zoom and pan, and while a pen is near the board your resting hand is ignored.</p>
+          <ul class="checks">
+            <li><b>Ten-point touch</b> — every finger draws independently.</li>
+            <li><b>Palm rejection</b> — write with a pen, rest your hand.</li>
+            <li><b>Palm wipe</b> — three fingers or a flat hand erases like a sponge.</li>
+            <li><b>Every finger draws</b> mode for young pupils who zoom by accident.</li>
+          </ul>
+        </div>
+        <div class="table-card">
+          <table>
+            <thead><tr><th>Action</th><th>Touch</th><th>Pen</th><th>Mouse</th></tr></thead>
+            <tbody>
+              <tr><td>Draw</td><td>one finger (up to 10)</td><td>pen tip</td><td>left button</td></tr>
+              <tr><td>Pan</td><td>two fingers</td><td>–</td><td>right / middle drag</td></tr>
+              <tr><td>Zoom</td><td>pinch</td><td>–</td><td>wheel</td></tr>
+              <tr><td>Erase</td><td>three fingers / flat hand</td><td>eraser end</td><td>–</td></tr>
+            </tbody>
+          </table>
+          <h4>Keyboard shortcuts</h4>
+          <div class="kbd-grid">
+            <span><kbd>Ctrl</kbd>+<kbd>Z</kbd> / <kbd>Y</kbd></span><span>Undo / redo</span>
+            <span><kbd>Ctrl</kbd>+<kbd>S</kbd></span><span>Save lesson</span>
+            <span><kbd>Ctrl</kbd>+<kbd>D</kbd></span><span>Duplicate</span>
+            <span><kbd>Ctrl</kbd>+<kbd>M</kbd></span><span>New page</span>
+            <span><kbd>PgUp</kbd> / <kbd>PgDn</kbd></span><span>Previous / next page</span>
+            <span><kbd>Ctrl</kbd>+<kbd>0</kbd></span><span>Fit page</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD -->
+    <section class="section download" id="download">
+      <div class="wrap">
+        <div class="dl-card">
+          <img src="assets/img/logo.svg" alt="" width="88" height="88">
+          <h2>Get ClassBoard</h2>
+          <p>Download the installer, run it, and you're ready to teach. It installs like any other app: Start menu entry, desktop shortcut, <code>.classboard</code> files open with a double-click, and an uninstaller in Settings&nbsp;→&nbsp;Apps.</p>
+          <a class="btn btn-primary btn-lg" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/latest" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3v11m0 0-4.5-4.5M12 14l4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0"/></svg>
+            <span data-dl-label>Download the installer</span>
+          </a>
+          <p class="small">Latest release on GitHub · Windows 10/11 64-bit · <a href="https://github.com/An0nym0us-glitch/Smart-board/releases" target="_blank" rel="noopener">All releases</a></p>
+          <ol class="steps">
+            <li><span>1</span>Download the setup <code>.exe</code> from the latest release</li>
+            <li><span>2</span>Run the installer</li>
+            <li><span>3</span>Open ClassBoard from the Start menu and start drawing</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILD -->
+    <section class="section section-alt" id="build">
+      <div class="wrap two-col">
+        <div>
+          <p class="kicker">For developers</p>
+          <h2>Build it from source.</h2>
+          <p>ClassBoard is written in C++17 with Qt 5.15. You need CMake ≥ 3.16, a C++17 compiler (MSVC 2019/2022, GCC 9+ or Clang 10+), and Qt 5.15 with the Widgets and Svg modules.</p>
+          <p>Contributions are welcome — check the architecture notes and file format docs to find your way around.</p>
+          <div class="doc-links">
+            <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/USER_GUIDE.md" target="_blank" rel="noopener">User guide →</a>
+            <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture →</a>
+            <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/FILE_FORMAT.md" target="_blank" rel="noopener">File format →</a>
+            <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/BUILDING.md" target="_blank" rel="noopener">Building &amp; packaging →</a>
+          </div>
+        </div>
+        <div class="code-card">
+          <div class="code-head">
+            <span>terminal</span>
+            <button class="copy" data-copy="code-build" type="button">Copy</button>
+          </div>
+<pre id="code-build"><code><span class="c"># clone</span>
+git clone https://github.com/An0nym0us-glitch/Smart-board.git
+cd Smart-board
+
+<span class="c"># configure &amp; build</span>
+cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+
+<span class="c"># run tests</span>
+ctest --test-dir build --output-on-failure
+
+<span class="c"># launch</span>
+./build/bin/ClassBoard</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="wrap narrow">
+        <header class="section-head">
+          <p class="kicker">FAQ</p>
+          <h2>Questions teachers ask.</h2>
+        </header>
+        <details>
+          <summary>Is ClassBoard really free?</summary>
+          <p>Yes. ClassBoard is open source under the MIT license. There are no accounts, subscriptions or paid tiers.</p>
+        </details>
+        <details>
+          <summary>Does it need an internet connection?</summary>
+          <p>No. ClassBoard works fully offline, including the Magic Equation Maker's handwriting recognition.</p>
+        </details>
+        <details>
+          <summary>Which displays does it work with?</summary>
+          <p>Any Windows 10/11 PC — from a laptop with a mouse to a large interactive panel. On touch screens it supports as many touch points as the board reports (usually 10 or 20) plus stylus pressure.</p>
+        </details>
+        <details>
+          <summary>Can I use my existing PDFs and PowerPoint slides?</summary>
+          <p>Yes. Import PDFs (every page keeps its size and aspect ratio) and .ppt / .pptx files (every slide becomes a page), then annotate on top. Export back to vector PDF, .pptx or PNG.</p>
+        </details>
+        <details>
+          <summary>What happens if the PC crashes mid-lesson?</summary>
+          <p>ClassBoard autosaves in the background and offers to recover your lesson the next time it starts. Saves are atomic, so a lesson file is never left half-written.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <a class="brand" href="#top">
+        <img src="assets/img/logo.svg" alt="" width="28" height="28">
+        <span>ClassBoard</span>
+      </a>
+      <p>Open-source digital whiteboard · MIT License · © 2026 ClassBoard contributors</p>
+      <nav>
+        <a href="https://github.com/An0nym0us-glitch/Smart-board" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/An0nym0us-glitch/Smart-board/issues" target="_blank" rel="noopener">Report an issue</a>
+        <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/LICENSE" target="_blank" rel="noopener">License</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
