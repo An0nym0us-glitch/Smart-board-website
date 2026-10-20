@@ -14,8 +14,8 @@ styles.css       all styling: blackboard (dark) and whiteboard (light) themes, r
                  phone width, respects reduced motion
 main.js          drawable hero board, live demos (graph, protractor, equation), Ctrl+K command
                  palette, theme switch, scroll effects, latest-release lookup
-guides/          the ClassBoard guide as PDF: full colour for screens, and an ink-saver edition
-                 for printing (light backgrounds, less ink)
+guides/          PDFs: "How to use ClassBoard" step-by-step manual, the ClassBoard guide in full
+                 colour for screens, and its ink-saver edition for printing (less ink)
 assets/img/      app screenshots, logo and guide cover thumbnails
 favicon.ico      app icon
 ```

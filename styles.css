@@ -664,10 +664,29 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
 .guide-actions .btn { min-height: 44px; padding: 0 14px; gap: 8px; font-size: .9rem; border-radius: 12px; white-space: nowrap; flex: 0 1 auto; min-width: 0; }
 @media (max-width: 1180px) {
   .guides { grid-template-columns: 1fr; max-width: 760px; margin: 0 auto; }
+  .guide-card.howto { max-width: 760px; margin: 0 auto 22px; grid-template-columns: 170px 1fr; gap: 24px; }
 }
 @media (max-width: 420px) {
   .guide-actions .btn { padding: 0 10px; gap: 6px; font-size: .84rem; }
   .guide-actions .btn svg { display: none; }
+}
+
+/* featured how-to manual */
+.guide-card.howto {
+  grid-template-columns: 210px 1fr; gap: 32px; padding: 30px; margin-bottom: 22px;
+  border-color: rgba(95, 211, 165, .35);
+  background: radial-gradient(500px 260px at 0% 0%, rgba(95, 211, 165, .12), transparent 70%), var(--surface-2);
+}
+.howto .paper img { transform: rotate(-3deg); }
+.howto .guide-body h3 { font-size: 1.6rem; }
+.chapters {
+  list-style: none; counter-reset: ch; padding: 0; margin: 6px 0 2px; width: 100%;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 22px; font-size: .86rem; color: var(--muted);
+}
+.chapters li { counter-increment: ch; display: flex; gap: 10px; align-items: baseline; min-width: 0; }
+.chapters li::before {
+  content: counter(ch); flex: none; width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center;
+  font: 700 .72rem var(--mono); background: var(--accent-soft); color: var(--accent);
 }
 
 /* ---------- Responsive ---------- */
@@ -703,7 +722,8 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
   .wrap { padding: 0 16px; }
   .cta-row .btn { flex: 1 1 100%; }
   .bento { grid-template-columns: 1fr; }
-  .guide-card { grid-template-columns: 1fr; justify-items: center; }
+  .guide-card, .guide-card.howto { grid-template-columns: 1fr; justify-items: center; padding: 22px; }
+  .chapters { grid-template-columns: 1fr; }
   .paper { width: 62%; margin-bottom: 8px; }
   .guide-body { align-items: stretch; }
   .guide-actions .btn { flex: 1 1 0; }
