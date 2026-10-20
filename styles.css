@@ -634,15 +634,45 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
 .palette-foot { display: flex; gap: 18px; padding: 10px 18px; border-top: 1px solid var(--border); font-size: .75rem; color: var(--muted); }
 .palette-foot kbd, .palette-search kbd { font-size: .7rem; padding: 1px 5px; margin-right: 3px; border-bottom-width: 2px; }
 
+/* ---------- Guide downloads ---------- */
+.guides { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.guide-card {
+  display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: start;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: 22px; padding: 24px;
+  transition: border-color .3s, transform .3s;
+}
+.guide-card:hover { border-color: rgba(95, 211, 165, .45); }
+.paper { position: relative; display: block; border-radius: 6px; perspective: 900px; }
+.paper img {
+  width: 100%; border-radius: 6px; background: #fff;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .05), 6px 6px 0 -2px var(--surface), 6px 6px 0 -1px var(--border-2), 0 24px 40px -18px rgba(0, 0, 0, .6);
+  transform: rotate(-2deg); transform-origin: 30% 80%; transition: transform .45s cubic-bezier(.3, 1.4, .5, 1);
+}
+.inksaver .paper img { transform: rotate(2deg); }
+.guide-card:hover .paper img { transform: rotate(0) translateY(-6px) scale(1.03); }
+.eco {
+  position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); white-space: nowrap;
+  background: var(--accent); color: var(--accent-ink); font: 700 .72rem var(--font); padding: 4px 10px; border-radius: 999px;
+  box-shadow: 0 6px 16px -6px rgba(0, 0, 0, .5);
+}
+.guide-body { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; min-width: 0; }
+.guide-body h3 { margin: 4px 0 0; font-size: 1.3rem; }
+.guide-body p { margin: 0; color: var(--muted); font-size: .95rem; }
+.guide-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; list-style: none; padding: 0; margin: 0; font-size: .82rem; color: var(--muted); }
+.guide-meta li::before { content: "•"; color: var(--accent); margin-right: 6px; }
+.guide-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.guide-actions .btn { min-height: 44px; padding: 0 14px; gap: 8px; font-size: .9rem; border-radius: 12px; }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 960px) {
   .bento { grid-template-columns: 1fr 1fr; }
+  .guides { grid-template-columns: 1fr; }
   .hero-grid, .two-col { grid-template-columns: 1fr; gap: 44px; }
   .hero { padding-top: 48px; }
   .board { transform: none; }
   .section { padding: 80px 0; }
 }
-@media (max-width: 760px) {
+@media (max-width: 1080px) {
   .nav-toggle { display: block; }
   .nav-links {
     position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch;
@@ -652,6 +682,12 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 12px 14px; }
   .nav-links .gh { margin: 6px 0 0; justify-content: center; }
+  .kbd-hint { display: none; }
+  .kbd-btn { width: 40px; padding: 0; justify-content: center; }
+  .nav-tools { margin-left: auto; margin-right: 4px; }
+  .nav.scrolled .nav-inner { padding: 0 6px 0 14px; }
+}
+@media (max-width: 760px) {
   .strip-grid { grid-template-columns: repeat(2, 1fr); }
   .strip-grid > div:nth-child(3) { border-left: 0; }
   .strip-grid > div:nth-child(n+3) { border-top: 1px solid var(--border); }
@@ -661,11 +697,11 @@ input[type="range"]:active::-webkit-slider-thumb { transform: scale(1.2); }
   .wrap { padding: 0 16px; }
   .cta-row .btn { flex: 1 1 100%; }
   .bento { grid-template-columns: 1fr; }
+  .guide-card { grid-template-columns: 1fr; justify-items: center; }
+  .paper { width: 62%; margin-bottom: 8px; }
+  .guide-body { align-items: stretch; }
+  .guide-actions .btn { flex: 1 1 auto; }
   .tile-graph { grid-column: auto; grid-row: auto; }
-  .kbd-hint { display: none; }
-  .kbd-btn { width: 40px; padding: 0; justify-content: center; }
-  .nav-tools { margin-left: auto; margin-right: 4px; }
-  .nav.scrolled .nav-inner { padding: 0 6px 0 14px; }
   .to-top { right: 14px; bottom: 14px; }
 }
 

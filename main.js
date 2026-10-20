@@ -221,7 +221,7 @@
   };
 
   // ---------- Reveal on scroll (staggered) ----------
-  var groups = [".card", ".tile", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
+  var groups = [".card", ".tile", ".guide-card", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -518,6 +518,9 @@
     { icon: "▣", label: "Screenshot tour", hint: "Section", run: go("#tour") },
     { icon: "✋", label: "Touch, pen & shortcuts", hint: "Section", run: go("#touch") },
     { icon: "⬇", label: "Download ClassBoard", hint: "Section", run: go("#download") },
+    { icon: "📘", label: "Guide (PDF)", hint: "Section", run: go("#guide") },
+    { icon: "📖", label: "Read the guide", hint: "PDF", run: open_("guides/ClassBoard-Guide.pdf") },
+    { icon: "🖨", label: "Print the ink-saver guide", hint: "PDF", run: open_("guides/ClassBoard-Guide-InkSaver.pdf") },
     { icon: "⚙", label: "Build from source", hint: "Section", run: go("#build") },
     { icon: "?", label: "FAQ", hint: "Section", run: go("#faq") },
     { icon: "◐", label: "Toggle blackboard / whiteboard theme", hint: "Action", run: function () { toggleTheme(themeBtn); } },

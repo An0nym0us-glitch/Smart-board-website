@@ -9,12 +9,14 @@ follow the app's *Blackboard Dark* theme, and the screenshots and logo come from
 ## Files
 
 ```text
-index.html       the page: hero, features, live demos, screenshot tour, touch/shortcuts, download, build, FAQ
+index.html       the page: hero, features, live demos, screenshot tour, touch/shortcuts, download, guide, build, FAQ
 styles.css       all styling: blackboard (dark) and whiteboard (light) themes, responsive down to
                  phone width, respects reduced motion
 main.js          drawable hero board, live demos (graph, protractor, equation), Ctrl+K command
                  palette, theme switch, scroll effects, latest-release lookup
-assets/img/      app screenshots and logo (from Smart-board/docs/images and resources/app)
+guides/          the ClassBoard guide as PDF: full colour for screens, and an ink-saver edition
+                 for printing (light backgrounds, less ink)
+assets/img/      app screenshots, logo and guide cover thumbnails
 favicon.ico      app icon
 ```
 
