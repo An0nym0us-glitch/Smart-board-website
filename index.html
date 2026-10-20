@@ -16,6 +16,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    try { var t = localStorage.getItem("cb-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -28,11 +31,22 @@
         <img src="assets/img/logo.svg" alt="" width="32" height="32">
         <span>ClassBoard</span>
       </a>
+      <div class="nav-tools">
+        <button class="kbd-btn" type="button" data-open-palette aria-label="Open command palette (Ctrl+K)">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span class="kbd-hint"><kbd>Ctrl</kbd><kbd>K</kbd></span>
+        </button>
+        <button class="theme-btn" type="button" aria-label="Switch to whiteboard (light) theme" title="Blackboard / whiteboard">
+          <svg class="sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></g></svg>
+          <svg class="moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.5 14.6A8.5 8.5 0 0 1 9.4 3.5a8.5 8.5 0 1 0 11.1 11.1z"/></svg>
+        </button>
+      </div>
       <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
       <nav id="nav-links" class="nav-links">
         <a href="#features">Features</a>
+        <a href="#demos">Demos</a>
         <a href="#tour">Tour</a>
         <a href="#touch">Touch</a>
         <a href="#download">Download</a>
@@ -193,6 +207,88 @@
             <div class="ico">⌁</div>
             <h3>Fully offline</h3>
             <p>No account, no cloud, no tracking. Everything — including handwriting recognition — runs on the classroom PC.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section class="section" id="demos">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Play with it</p>
+          <h2>Little <span class="grad">live demos</span>.</h2>
+          <p>A taste of what the tools do on the board. Drag, slide and poke around.</p>
+        </header>
+
+        <div class="bento">
+          <article class="tile tile-graph">
+            <div class="tile-head"><span class="chip">ƒ Function graph</span><span class="formula" id="g-formula">y = 2·sin(1x)</span></div>
+            <svg class="graph" viewBox="0 0 400 240" preserveAspectRatio="none" aria-label="Plot of y = a·sin(b·x)" role="img">
+              <defs>
+                <pattern id="ggrid" width="25" height="24" patternUnits="userSpaceOnUse"><path d="M25 0H0V24" fill="none" stroke="var(--grid)" stroke-width="1"/></pattern>
+                <linearGradient id="gfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".35"/><stop offset="1" stop-color="var(--accent)" stop-opacity="0"/></linearGradient>
+              </defs>
+              <rect width="400" height="240" fill="url(#ggrid)"/>
+              <path d="M0 120H400M200 0V240" stroke="var(--muted)" stroke-width="1.5" opacity=".6"/>
+              <path id="g-area" fill="url(#gfill)"/>
+              <path id="g-path" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>
+              <circle id="g-dot" r="6" fill="var(--orange)" stroke="var(--window)" stroke-width="2"/>
+            </svg>
+            <div class="sliders">
+              <label><span>a <output id="a-out">2.0</output></span><input type="range" id="g-a" min="0.2" max="4" step="0.1" value="2"></label>
+              <label><span>b <output id="b-out">1.0</output></span><input type="range" id="g-b" min="0.2" max="4" step="0.1" value="1"></label>
+            </div>
+          </article>
+
+          <article class="tile tile-protractor">
+            <div class="tile-head"><span class="chip">◠ Protractor</span></div>
+            <svg class="protractor" viewBox="0 0 220 130" aria-label="Protractor demo: drag the orange knob" role="img">
+              <path d="M10 120 A100 100 0 0 1 210 120 Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+              <g id="ticks" stroke="var(--muted)" stroke-width="1"></g>
+              <path id="p-arc" fill="none" stroke="var(--orange)" stroke-width="3"/>
+              <line x1="110" y1="120" x2="200" y2="120" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+              <line id="p-arm" x1="110" y1="120" x2="110" y2="30" stroke="var(--orange)" stroke-width="3" stroke-linecap="round"/>
+              <circle id="p-knob" r="9" fill="var(--orange)" stroke="var(--window)" stroke-width="2" class="knob"/>
+              <circle cx="110" cy="120" r="4" fill="var(--text)"/>
+            </svg>
+            <p class="readout"><span id="p-deg">90</span>°</p>
+          </article>
+
+          <article class="tile tile-eq">
+            <div class="tile-head"><span class="chip">∑ Equation</span></div>
+            <code class="typing" id="eq-src"></code>
+            <div class="eq-out" id="eq-out" aria-hidden="true">
+              <i>x</i> = <span class="frac"><span>−<i>b</i> ± √<span class="ov"><i>b</i>² − 4<i>ac</i></span></span><span>2<i>a</i></span></span>
+            </div>
+          </article>
+
+          <article class="tile tile-touch">
+            <div class="tile-head"><span class="chip">✋ Ten-point touch</span></div>
+            <div class="touchpad" aria-hidden="true">
+              <i style="--x:14%;--y:62%;--c:var(--accent);--d:0s"></i>
+              <i style="--x:24%;--y:34%;--c:var(--blue);--d:.15s"></i>
+              <i style="--x:36%;--y:24%;--c:var(--orange);--d:.3s"></i>
+              <i style="--x:48%;--y:28%;--c:#ffe066;--d:.45s"></i>
+              <i style="--x:58%;--y:44%;--c:#ef6a64;--d:.6s"></i>
+              <i style="--x:66%;--y:66%;--c:var(--accent);--d:.75s"></i>
+              <i style="--x:76%;--y:38%;--c:var(--blue);--d:.9s"></i>
+              <i style="--x:84%;--y:26%;--c:var(--orange);--d:1.05s"></i>
+              <i style="--x:90%;--y:52%;--c:#c792ea;--d:1.2s"></i>
+              <i style="--x:40%;--y:74%;--c:#ffe066;--d:1.35s"></i>
+            </div>
+            <p class="tile-foot">Every finger draws its own line.</p>
+          </article>
+
+          <article class="tile tile-offline">
+            <div class="tile-head"><span class="chip">⌁ Offline</span></div>
+            <div class="switch-row">
+              <span>Internet</span>
+              <span class="switch" aria-hidden="true"><i></i></span>
+            </div>
+            <ul class="pills">
+              <li>No account</li><li>No cloud</li><li>No tracking</li><li>Still works</li>
+            </ul>
           </article>
         </div>
       </div>
@@ -365,6 +461,23 @@ ctest --test-dir build --output-on-failure
       </nav>
     </div>
   </footer>
+
+  <a class="to-top" href="#top" aria-label="Back to top">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><circle class="ring-bg" cx="24" cy="24" r="21"/><circle class="ring" cx="24" cy="24" r="21"/></svg>
+    <span aria-hidden="true">↑</span>
+  </a>
+
+  <dialog class="palette" aria-label="Command palette">
+    <div class="palette-box">
+      <div class="palette-search">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Jump to a section or run an action…" aria-label="Search commands" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="palette-list">
+        <kbd>Esc</kbd>
+      </div>
+      <ul class="palette-list" id="palette-list" role="listbox"></ul>
+      <div class="palette-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>Enter</kbd> open</span><span><kbd>Ctrl</kbd><kbd>K</kbd> toggle</span></div>
+    </div>
+  </dialog>
 
   <script src="main.js"></script>
 </body>
