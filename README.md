@@ -9,20 +9,24 @@ follow the app's *Blackboard Dark* theme, and the screenshots and logo come from
 ## Files
 
 ```text
-index.html       the page: hero, features, live demos, screenshot tour, touch/shortcuts, download, guide, build, FAQ
+index.html       the page: hero, what's new (calculator demo), features, live demos, screenshot tour,
+                 touch/shortcuts, download, guides, build, FAQ
 styles.css       all styling: blackboard (dark) and whiteboard (light) themes, responsive down to
                  phone width, respects reduced motion
-main.js          drawable hero board, live demos (graph, protractor, equation), Ctrl+K command
+main.js          drawable hero board, live demos (graph, protractor, equation, calculator), Ctrl+K command
                  palette, theme switch, scroll effects, latest-release lookup
-guides/          PDFs: "How to use ClassBoard" step-by-step manual, the ClassBoard guide in full
-                 colour for screens, and its ink-saver edition for printing (less ink)
+guides/          PDFs: "How to use ClassBoard" manual (full and compact, from the app's docs/),
+                 the ClassBoard guide in full colour for screens, and its ink-saver edition
 assets/img/      app screenshots, logo and guide cover thumbnails
 favicon.ico      app icon
 ```
 
-The download buttons point at the app's latest GitHub release page. When the page loads,
-`main.js` asks the GitHub API for the latest release, shows its version in the hero badge and,
-if the release has a `*Setup*.exe` asset, links the buttons straight to that installer.
+The download buttons link straight to the current installer (v0.3.0). When the page loads,
+`main.js` asks the GitHub API for the latest release and, if it has a `*Setup*.exe` asset,
+points the buttons, version, size and release-notes link at that release instead.
+
+When the app has a new release, update the hard-coded v0.3.0 links and the "What's new"
+section in `index.html`, and copy the manuals from the app's `docs/` folder into `guides/`.
 
 ## Preview locally
 

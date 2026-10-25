@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ClassBoard — the open-source digital whiteboard for classrooms</title>
-  <meta name="description" content="ClassBoard is a free, open-source digital whiteboard for large interactive classroom displays. Ten-point touch, geometry instruments, equations, graphs, PDF and PowerPoint import. Windows 10/11, fully offline.">
+  <meta name="description" content="ClassBoard is a free, open-source digital whiteboard for large interactive classroom displays. Ten-point touch, geometry instruments, equations, graphs, a scientific calculator, PDF and PowerPoint import. Windows 10/11, fully offline.">
   <meta name="theme-color" content="#141816">
   <meta property="og:title" content="ClassBoard — the open-source digital whiteboard for classrooms">
-  <meta property="og:description" content="Ten-point touch, geometry instruments, equations and graphs. Free, offline, made for interactive classroom displays.">
+  <meta property="og:description" content="Ten-point touch, geometry instruments, equations, graphs and a calculator. Free, offline, made for interactive classroom displays.">
   <meta property="og:image" content="assets/img/more-popover.png">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
@@ -67,12 +67,12 @@
       <canvas class="dust" aria-hidden="true"></canvas>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow"><span class="dot"></span> <span data-version>Latest release</span> · Free &amp; open source</p>
+          <a class="eyebrow" href="#new"><span class="dot"></span> v0.3.0 · New: Calculator <span class="arrow" aria-hidden="true">→</span></a>
           <h1><span class="w">The</span> <span class="w">whiteboard</span> <span class="w">your</span><br><span class="chalk">classroom deserves.</span></h1>
           <p class="lead">ClassBoard is a digital whiteboard built for large interactive classroom displays.
-            Ten-point touch, real geometry instruments, equations and graphs — all fully offline on Windows&nbsp;10/11.</p>
+            Ten-point touch, real geometry instruments, equations, graphs and a calculator — all fully offline on Windows&nbsp;10/11.</p>
           <div class="cta-row">
-            <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/latest" target="_blank" rel="noopener">
+            <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/download/v0.3.0/ClassBoard-Setup-0.3.0-x64.exe">
               <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10 4.5v7H3zm0 13 7 1v-7H3zM11 4.4 21 3v8.5H11zm0 15.2L21 21v-8.5H11z"/></svg>
               Download for Windows
             </a>
@@ -81,7 +81,7 @@
           <ul class="hero-meta">
             <li>Windows 10 / 11 · x64</li>
             <li>Works fully offline</li>
-            <li>MIT licensed</li>
+            <li>Free &amp; open source (MIT)</li>
           </ul>
         </div>
 
@@ -134,10 +134,92 @@
     <!-- MARQUEE -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Pen</span><span>Highlighter</span><span>✨ Magic Highlighter</span><span>Eraser</span><span>Palm wipe</span><span>Ruler</span><span>Protractor</span><span>Set square</span><span>Compass</span><span>Shapes</span><span>Measurements</span><span>Equations</span><span>Function graphs</span><span>Tables</span><span>Templates</span><span>PDF import</span><span>PowerPoint export</span><span>Autosave</span>
-        <span>Pen</span><span>Highlighter</span><span>✨ Magic Highlighter</span><span>Eraser</span><span>Palm wipe</span><span>Ruler</span><span>Protractor</span><span>Set square</span><span>Compass</span><span>Shapes</span><span>Measurements</span><span>Equations</span><span>Function graphs</span><span>Tables</span><span>Templates</span><span>PDF import</span><span>PowerPoint export</span><span>Autosave</span>
+        <span>Pen</span><span>Highlighter</span><span>✨ Magic Highlighter</span><span>Eraser</span><span>Palm wipe</span><span>Ruler</span><span>Protractor</span><span>Set square</span><span>Compass</span><span>Shapes</span><span>Measurements</span><span>Equations</span><span>Function graphs</span><span>🧮 Calculator</span><span>Tables</span><span>Templates</span><span>PDF import</span><span>PowerPoint export</span><span>Autosave</span>
+        <span>Pen</span><span>Highlighter</span><span>✨ Magic Highlighter</span><span>Eraser</span><span>Palm wipe</span><span>Ruler</span><span>Protractor</span><span>Set square</span><span>Compass</span><span>Shapes</span><span>Measurements</span><span>Equations</span><span>Function graphs</span><span>🧮 Calculator</span><span>Tables</span><span>Templates</span><span>PDF import</span><span>PowerPoint export</span><span>Autosave</span>
       </div>
     </div>
+
+    <!-- WHAT'S NEW -->
+    <section class="section whatsnew" id="new">
+      <div class="wrap new-grid">
+        <div class="new-copy">
+          <p class="kicker">New in v0.3.0</p>
+          <h2>A <span class="grad">calculator</span>, right on the board.</h2>
+          <p>Open it from <b>More → Calculator</b>: a scientific calculator with big touch keys, made for the classroom board. The one on the right works just like it, so go ahead and try it.</p>
+          <ul class="checks">
+            <li><b>The answer shows as you type</b> — and when something can't be calculated, a plain message says why.</li>
+            <li><b>Trig in DEG or RAD</b> — exact answers at the usual angles: sin 30 = 0.5, tan 45 = 1.</li>
+            <li><b>ln, log, π, e, n! and %</b> — for example 15% × 80 = 12.</li>
+            <li><b>Ans</b> — after =, pressing an operator such as × carries on from the answer.</li>
+            <li><b>Put on board</b> — writes the sum and its answer onto the page as an equation you can move, resize or undo.</li>
+          </ul>
+          <p class="also">Also new: the PDF user guide is installed with the app and has its own Start-menu shortcut, and the third-party licence notices are installed with it too.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/download/v0.3.0/ClassBoard-Setup-0.3.0-x64.exe">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10 4.5v7H3zm0 13 7 1v-7H3zM11 4.4 21 3v8.5H11zm0 15.2L21 21v-8.5H11z"/></svg>
+              Get the update
+            </a>
+            <a class="btn btn-ghost" href="https://github.com/An0nym0us-glitch/Smart-board/releases/tag/v0.3.0" target="_blank" rel="noopener">Release notes</a>
+          </div>
+        </div>
+
+        <div class="calc-wrap">
+          <div class="calc" id="calc" role="group" aria-label="Calculator demo: tap the keys or type on your keyboard">
+            <div class="calc-head"><span>🧮 Calculator</span><span class="calc-try">Try it</span></div>
+            <div class="calc-expr" id="calc-expr" aria-label="Calculation"></div>
+            <div class="calc-result" id="calc-result" aria-live="polite"></div>
+            <div class="calc-angles"><span>Angles</span>
+              <button type="button" class="mode" data-mode="deg" aria-pressed="true">DEG</button>
+              <button type="button" class="mode" data-mode="rad" aria-pressed="false">RAD</button>
+            </div>
+            <div class="calc-keys">
+              <button type="button" class="k k-fn" data-k="sin(">sin</button>
+              <button type="button" class="k k-fn" data-k="cos(">cos</button>
+              <button type="button" class="k k-fn" data-k="tan(">tan</button>
+              <button type="button" class="k k-fn" data-k="ln(">ln</button>
+              <button type="button" class="k k-fn" data-k="log(">log</button>
+              <button type="button" class="k k-fn" data-k="π" aria-label="Pi">π</button>
+              <button type="button" class="k k-fn" data-k="sin⁻¹(" aria-label="Inverse sine">sin⁻¹</button>
+              <button type="button" class="k k-fn" data-k="cos⁻¹(" aria-label="Inverse cosine">cos⁻¹</button>
+              <button type="button" class="k k-fn" data-k="tan⁻¹(" aria-label="Inverse tangent">tan⁻¹</button>
+              <button type="button" class="k k-fn" data-k="√" aria-label="Square root">√</button>
+              <button type="button" class="k k-fn" data-k="²" aria-label="Square">x²</button>
+              <button type="button" class="k k-fn" data-k="^" aria-label="Power">xʸ</button>
+              <button type="button" class="k" data-k="7">7</button>
+              <button type="button" class="k" data-k="8">8</button>
+              <button type="button" class="k" data-k="9">9</button>
+              <button type="button" class="k k-op" data-k="÷" aria-label="Divide">÷</button>
+              <button type="button" class="k k-op" data-k="back" aria-label="Delete">⌫</button>
+              <button type="button" class="k k-ac" data-k="clear" aria-label="Clear all">AC</button>
+              <button type="button" class="k" data-k="4">4</button>
+              <button type="button" class="k" data-k="5">5</button>
+              <button type="button" class="k" data-k="6">6</button>
+              <button type="button" class="k k-op" data-k="×" aria-label="Multiply">×</button>
+              <button type="button" class="k k-op" data-k="(">(</button>
+              <button type="button" class="k k-op" data-k=")">)</button>
+              <button type="button" class="k" data-k="1">1</button>
+              <button type="button" class="k" data-k="2">2</button>
+              <button type="button" class="k" data-k="3">3</button>
+              <button type="button" class="k k-op" data-k="−" aria-label="Minus">−</button>
+              <button type="button" class="k k-op" data-k="!" aria-label="Factorial">n!</button>
+              <button type="button" class="k k-op" data-k="%" aria-label="Percent">%</button>
+              <button type="button" class="k" data-k="0">0</button>
+              <button type="button" class="k" data-k=".">.</button>
+              <button type="button" class="k k-fn" data-k="e">e</button>
+              <button type="button" class="k k-op" data-k="+" aria-label="Plus">+</button>
+              <button type="button" class="k k-op" data-k="Ans">Ans</button>
+              <button type="button" class="k k-eq" data-k="equals" aria-label="Equals">=</button>
+            </div>
+            <div class="calc-actions">
+              <button type="button" class="act" data-act="board">＋ Put on board</button>
+              <button type="button" class="act" data-act="copy">⧉ Copy result</button>
+            </div>
+            <div class="calc-recent"><h4>Recent</h4><ul id="calc-recent"><li class="none">Nothing yet</li></ul></div>
+          </div>
+          <div class="calc-board" id="calc-board" aria-live="polite"><span class="calc-board-hint">Tap <b>Put on board</b> and the sum appears here</span></div>
+        </div>
+      </div>
+    </section>
 
     <!-- FEATURES -->
     <section class="section" id="features">
@@ -183,6 +265,11 @@
             <div class="ico">ƒ</div>
             <h3>Function graphs</h3>
             <p>Plot several functions with automatic sliders for a, b, c…, zoom and pan, points that snap onto curves, vectors and value tables.</p>
+          </article>
+          <article class="card card-new">
+            <div class="ico">🧮</div>
+            <h3>Calculator <span class="new-badge">New</span></h3>
+            <p>A scientific calculator with big touch keys: powers, roots, trig in DEG or RAD, ln, log, n!, % and Ans. <em>Put on board</em> writes the sum and its answer onto the page as an equation.</p>
           </article>
           <article class="card">
             <div class="ico">▤</div>
@@ -310,6 +397,7 @@
             <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/instruments.png"    data-cap="Ruler, protractor, set square and compass lie on the board and draw along their edges.">Instruments</button>
             <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/equation.png"       data-cap="Type LaTeX or tap the palette — the preview updates live and stays editable.">Equation</button>
             <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/function-graph.png" data-cap="Plot functions with automatic parameter sliders, zoom, pan and value tables.">Graph</button>
+            <button role="tab" aria-selected="false" aria-controls="shot" data-src="assets/img/calculator.png" data-cap="New in v0.3.0: the Calculator (More → Calculator) with big touch keys, DEG / RAD, Ans and Put on board.">Calculator</button>
           </div>
           <figure class="shot-frame" id="shot" role="tabpanel">
             <div class="window-bar"><i></i><i></i><i></i><span>ClassBoard</span></div>
@@ -365,16 +453,17 @@
           <img src="assets/img/logo.svg" alt="" width="88" height="88">
           <h2>Get ClassBoard</h2>
           <p>Download the installer, run it, and you're ready to teach. It installs like any other app: Start menu entry, desktop shortcut, <code>.classboard</code> files open with a double-click, and an uninstaller in Settings&nbsp;→&nbsp;Apps.</p>
-          <a class="btn btn-primary btn-lg" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/latest" target="_blank" rel="noopener">
+          <a class="btn btn-primary btn-lg" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/download/v0.3.0/ClassBoard-Setup-0.3.0-x64.exe">
             <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="currentColor" d="M12 3v11m0 0-4.5-4.5M12 14l4.5-4.5M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill-opacity="0"/></svg>
-            <span data-dl-label>Download the installer</span>
+            <span data-dl-label>Download ClassBoard-Setup-0.3.0-x64.exe</span>
           </a>
-          <p class="small">Latest release on GitHub · Windows 10/11 64-bit · <a href="https://github.com/An0nym0us-glitch/Smart-board/releases" target="_blank" rel="noopener">All releases</a> · New here? <a href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">How to use ClassBoard</a></p>
+          <p class="small"><span data-version>v0.3.0</span> · <span data-dl-size>41 MB</span> · Windows 10/11 64-bit · <a data-notes href="https://github.com/An0nym0us-glitch/Smart-board/releases/tag/v0.3.0" target="_blank" rel="noopener">Release notes</a> · <a href="https://github.com/An0nym0us-glitch/Smart-board/releases" target="_blank" rel="noopener">All releases</a> · New here? <a href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">How to use ClassBoard</a></p>
           <ol class="steps">
-            <li><span>1</span><div>Download the setup <code>.exe</code> from the latest release</div></li>
-            <li><span>2</span><div>Run the installer</div></li>
+            <li><span>1</span><div>Download the setup <code>.exe</code> and double-click it</div></li>
+            <li><span>2</span><div>If Windows says <em>“Windows protected your PC”</em>, click <b>More info → Run anyway</b></div></li>
             <li><span>3</span><div>Open ClassBoard from the Start menu and start drawing</div></li>
           </ol>
+          <p class="update-note">Already have ClassBoard? Run the new installer over it — your lessons and settings are kept.</p>
         </div>
         </div>
       </div>
@@ -391,13 +480,13 @@
 
         <article class="guide-card howto">
           <a class="paper" href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener" aria-label="Open How to use ClassBoard (PDF)">
-            <img src="assets/img/guide-howto-cover.jpg" alt="First page of How to use ClassBoard: contents, installing steps and the ribbon" width="497" height="702" loading="lazy">
+            <img src="assets/img/guide-howto-cover.jpg" alt="Cover of How to use ClassBoard, version 0.3.0, showing the Pen menu" width="497" height="702" loading="lazy">
             <span class="eco" aria-hidden="true">★ Start here</span>
           </a>
           <div class="guide-body">
-            <span class="chip">Step-by-step manual · v0.2.2</span>
+            <span class="chip">Step-by-step manual · v0.3.0</span>
             <h3>How to use ClassBoard</h3>
-            <p>A compact user manual that walks you through the app from installing it to the last keyboard shortcut, with a screenshot next to every menu and a troubleshooting table at the end.</p>
+            <p>The illustrated user manual for ClassBoard 0.3.0. It walks you through the app from installing it to the last keyboard shortcut, with a screenshot next to every menu, the new Calculator, and a troubleshooting table at the end. It is also installed with the app.</p>
             <ol class="chapters">
                 <li>Installing and starting</li>
                 <li>The screen and the ribbon</li>
@@ -409,6 +498,7 @@
                 <li>Geometry and exact values</li>
                 <li>Equations &amp; Magic Equation Maker</li>
                 <li>Graphs</li>
+                <li>Calculator <span class="new-badge">New</span></li>
                 <li>Pages, backgrounds, templates</li>
                 <li>Saving, importing, exporting</li>
                 <li>Zoom and view</li>
@@ -416,7 +506,7 @@
                 <li>Keyboard shortcuts</li>
                 <li>Tips and troubleshooting</li>
             </ol>
-            <ul class="guide-meta"><li>7 pages</li><li>PDF · 1.4 MB</li><li>A4</li><li>16 chapters</li></ul>
+            <ul class="guide-meta"><li>18 pages</li><li>PDF · 0.9 MB</li><li>A4</li><li>17 chapters</li></ul>
             <div class="guide-actions">
               <a class="btn btn-primary" href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
@@ -427,6 +517,7 @@
                 Download
               </a>
             </div>
+            <p class="print-alt">🖨 Printing? Get the <a href="guides/ClassBoard-How-to-use-compact.pdf" target="_blank" rel="noopener">compact 9-page version</a> (0.9 MB).</p>
           </div>
         </article>
 
@@ -540,6 +631,14 @@ ctest --test-dir build --output-on-failure
           <p>Yes. Import PDFs (every page keeps its size and aspect ratio) and .ppt / .pptx files (every slide becomes a page), then annotate on top. Export back to vector PDF, .pptx or PNG.</p>
         </details>
         <details>
+          <summary>How do I update to a new version?</summary>
+          <p>Download the newest installer and run it over the old one. It closes ClassBoard first if it is open, and keeps your lessons and settings.</p>
+        </details>
+        <details>
+          <summary>Windows says “Windows protected your PC”. Is that safe?</summary>
+          <p>The message appears because the installer is not digitally signed. Click <b>More info → Run anyway</b>. ClassBoard's code is public on GitHub, and each release's installer is built and tested from that code by GitHub Actions.</p>
+        </details>
+        <details>
           <summary>What happens if the PC crashes mid-lesson?</summary>
           <p>ClassBoard autosaves in the background and offers to recover your lesson the next time it starts. Saves are atomic, so a lesson file is never left half-written.</p>
         </details>
@@ -559,6 +658,7 @@ ctest --test-dir build --output-on-failure
         <a href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">How to use (PDF)</a>
         <a href="guides/ClassBoard-Guide.pdf" target="_blank" rel="noopener">Guide (PDF)</a>
         <a href="https://github.com/An0nym0us-glitch/Smart-board/issues" target="_blank" rel="noopener">Report an issue</a>
+        <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">Third-party notices</a>
         <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/LICENSE" target="_blank" rel="noopener">License</a>
       </nav>
     </div>

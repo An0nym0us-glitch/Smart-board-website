@@ -221,7 +221,7 @@
   };
 
   // ---------- Reveal on scroll (staggered) ----------
-  var groups = [".card", ".tile", ".guide-card", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
+  var groups = [".card", ".tile", ".guide-card", ".new-copy", ".calc-wrap", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -334,16 +334,18 @@
 
   // ---------- Latest release ----------
   // Point download buttons straight at the latest installer when the GitHub API answers.
-  // Falls back to the releases page (already in the markup) on any failure.
+  // On any failure the links in the markup (the v0.3.0 installer) stay as they are.
   fetch("https://api.github.com/repos/" + REPO + "/releases/latest", { headers: { Accept: "application/vnd.github+json" } })
     .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function (release) {
       var version = release.tag_name || "";
       document.querySelectorAll("[data-version]").forEach(function (el) { el.textContent = version; });
+      if (release.html_url) document.querySelectorAll("[data-notes]").forEach(function (a) { a.href = release.html_url; });
       var exe = (release.assets || []).filter(function (a) { return /setup.*\.exe$/i.test(a.name); })[0];
       if (!exe) return;
       document.querySelectorAll("[data-dl]").forEach(function (a) { a.href = exe.browser_download_url; });
       document.querySelectorAll("[data-dl-label]").forEach(function (el) { el.textContent = "Download " + exe.name; });
+      document.querySelectorAll("[data-dl-size]").forEach(function (el) { el.textContent = Math.round(exe.size / 1e6) + " MB"; });
     })
     .catch(function () {});
 
@@ -513,6 +515,8 @@
   function go(hash) { return function () { document.querySelector(hash).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }; }
   function open_(url) { return function () { window.open(url, "_blank", "noopener"); }; }
   var commands = [
+    { icon: "✨", label: "What's new in v0.3.0", hint: "Section", run: go("#new") },
+    { icon: "🧮", label: "Try the calculator", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var c = document.getElementById("calc"); if (c) c.focus({ preventScroll: true }); }, 500); } },
     { icon: "★", label: "Features", hint: "Section", run: go("#features") },
     { icon: "▶", label: "Live demos", hint: "Section", run: go("#demos") },
     { icon: "▣", label: "Screenshot tour", hint: "Section", run: go("#tour") },
@@ -522,6 +526,8 @@
     { icon: "🧭", label: "How to use ClassBoard", hint: "PDF", run: open_("guides/ClassBoard-How-to-use.pdf") },
     { icon: "📖", label: "Read the guide", hint: "PDF", run: open_("guides/ClassBoard-Guide.pdf") },
     { icon: "🖨", label: "Print the ink-saver guide", hint: "PDF", run: open_("guides/ClassBoard-Guide-InkSaver.pdf") },
+    { icon: "🖨", label: "How to use ClassBoard — compact, for printing", hint: "PDF", run: open_("guides/ClassBoard-How-to-use-compact.pdf") },
+    { icon: "↗", label: "Release notes", hint: "Link", run: function () { open_(document.querySelector("[data-notes]").href)(); } },
     { icon: "⚙", label: "Build from source", hint: "Section", run: go("#build") },
     { icon: "?", label: "FAQ", hint: "Section", run: go("#faq") },
     { icon: "◐", label: "Toggle blackboard / whiteboard theme", hint: "Action", run: function () { toggleTheme(themeBtn); } },
@@ -603,4 +609,262 @@
       openPalette();
     }
   });
+
+  // ---------- Demo: calculator (v0.3.0) ----------
+  // A small recursive-descent parser over the display text; no eval.
+  var calcEl = document.getElementById("calc");
+  if (calcEl) {
+    var exprEl = document.getElementById("calc-expr");
+    var resEl = document.getElementById("calc-result");
+    var recentEl = document.getElementById("calc-recent");
+    var boardEl = document.getElementById("calc-board");
+    var tokens = [];          // display tokens, so ⌫ removes "sin(" or "Ans" in one go
+    var ans = 0, exprAns = 0, deg = true, justEvaluated = false, lastGood = null; // exprAns: the Ans the current sum uses
+    var recent = [];
+
+    function CalcError(msg) { this.message = msg; }
+    function Incomplete() {}
+
+    function lex(str) {
+      var out = [], i = 0;
+      var words = ["sin⁻¹(", "cos⁻¹(", "tan⁻¹(", "sin(", "cos(", "tan(", "ln(", "log(", "Ans"];
+      while (i < str.length) {
+        var c = str[i], w = null;
+        for (var k = 0; k < words.length; k++) if (str.substr(i, words[k].length) === words[k]) { w = words[k]; break; }
+        if (w) { out.push(w === "Ans" ? { t: "num", v: exprAns } : { t: "fn", v: w.slice(0, -1) }); i += w.length; continue; }
+        if (c === " ") { i++; continue; }
+        if (/[0-9.]/.test(c)) {
+          var j = i; while (j < str.length && /[0-9.]/.test(str[j])) j++;
+          var txt = str.slice(i, j);
+          if ((txt.match(/\./g) || []).length > 1 || txt === ".") throw new CalcError("That number has too many points");
+          out.push({ t: "num", v: parseFloat(txt) }); i = j; continue;
+        }
+        if (c === "π") { out.push({ t: "num", v: Math.PI }); i++; continue; }
+        if (c === "e") { out.push({ t: "num", v: Math.E }); i++; continue; }
+        out.push({ t: "op", v: c }); i++;
+      }
+      return out;
+    }
+
+    function toRad(x) { return deg ? x * Math.PI / 180 : x; }
+    function fromRad(x) { return deg ? x * 180 / Math.PI : x; }
+    function clean(x) {
+      if (!isFinite(x)) throw new CalcError("Too large");
+      if (Math.abs(x) < 1e-12) return 0;
+      return parseFloat(x.toPrecision(12)); // so sin 30 = 0.5 exactly
+    }
+    function fact(n) {
+      if (n < 0 || Math.floor(n) !== n) throw new CalcError("n! needs a whole number of 0 or more");
+      if (n > 170) throw new CalcError("Too large");
+      var r = 1; for (var i = 2; i <= n; i++) r *= i; return r;
+    }
+    function applyFn(name, x) {
+      switch (name) {
+        case "sin": return Math.sin(toRad(x));
+        case "cos": return Math.cos(toRad(x));
+        case "tan":
+          if (deg ? Math.abs(((x % 180) + 180) % 180 - 90) < 1e-9 : Math.abs(Math.cos(x)) < 1e-12) throw new CalcError("Not defined: tan of " + (deg ? "90°" : "π/2"));
+          return Math.tan(toRad(x));
+        case "sin⁻¹": if (Math.abs(x) > 1) throw new CalcError("Not defined: sin⁻¹ needs a number from −1 to 1"); return fromRad(Math.asin(x));
+        case "cos⁻¹": if (Math.abs(x) > 1) throw new CalcError("Not defined: cos⁻¹ needs a number from −1 to 1"); return fromRad(Math.acos(x));
+        case "tan⁻¹": return fromRad(Math.atan(x));
+        case "ln": if (x <= 0) throw new CalcError("Not defined: ln needs a number above 0"); return Math.log(x);
+        case "log": if (x <= 0) throw new CalcError("Not defined: log needs a number above 0"); return Math.log10(x);
+      }
+    }
+
+    function evaluate(str) {
+      var tk = lex(str), pos = 0;
+      // close open brackets for the user, like the app does
+      var depth = 0;
+      tk.forEach(function (t) { if (t.t === "fn" || t.v === "(") depth++; else if (t.v === ")") depth--; });
+      if (depth < 0) throw new CalcError("There is a ) without a (");
+      while (depth-- > 0) tk.push({ t: "op", v: ")" });
+      if (!tk.length) throw new Incomplete();
+
+      function peek() { return tk[pos]; }
+      function startsValue(t) { return t && (t.t === "num" || t.t === "fn" || t.v === "(" || t.v === "√"); }
+      function expr() {
+        var v = term();
+        while (peek() && (peek().v === "+" || peek().v === "−")) {
+          var op = tk[pos++].v, r = term();
+          v = op === "+" ? v + r : v - r;
+        }
+        return v;
+      }
+      function term() {
+        var v = unary();
+        for (;;) {
+          var t = peek();
+          if (t && (t.v === "×" || t.v === "÷")) {
+            pos++;
+            var r = unary();
+            if (t.v === "÷" && r === 0) throw new CalcError(v === 0 ? "Not defined: 0 ÷ 0" : "Can't divide by zero");
+            v = t.v === "×" ? v * r : v / r;
+          } else if (startsValue(t)) {
+            v = v * unary(); // 2π, 3(4+1)
+          } else return v;
+        }
+      }
+      function unary() {
+        var t = peek();
+        if (t && t.v === "−") { pos++; return -unary(); }
+        if (t && t.v === "+") { pos++; return unary(); }
+        return power();
+      }
+      function power() {
+        var b = postfix();
+        if (peek() && peek().v === "^") { pos++; var x = unary(); var r = Math.pow(b, x); if (isNaN(r)) throw new CalcError("Not defined for these numbers"); return r; }
+        return b;
+      }
+      function postfix() {
+        var v = primary();
+        while (peek() && (peek().v === "!" || peek().v === "%" || peek().v === "²")) {
+          var op = tk[pos++].v;
+          v = op === "!" ? fact(v) : op === "%" ? v / 100 : v * v;
+        }
+        return v;
+      }
+      function primary() {
+        var t = tk[pos++];
+        if (!t) throw new Incomplete();
+        if (t.t === "num") return t.v;
+        if (t.t === "fn") { var a = expr(); expectClose(); return applyFn(t.v, a); }
+        if (t.v === "(") { var v = expr(); expectClose(); return v; }
+        if (t.v === "√") { var x = postfix(); if (x < 0) throw new CalcError("Not defined: √ of a negative number"); return Math.sqrt(x); }
+        if (t.v === ")") throw new Incomplete();
+        throw new Incomplete();
+      }
+      function expectClose() {
+        var t = tk[pos++];
+        if (!t || t.v !== ")") throw new Incomplete();
+      }
+      var v = expr();
+      if (pos < tk.length) throw new Incomplete();
+      return clean(v);
+    }
+
+    function fmt(x) {
+      if (x === 0) return "0";
+      var a = Math.abs(x);
+      if (a >= 1e12 || a < 1e-9) return x.toExponential(6).replace(/\.?0+e/, "e").replace("e+", " × 10^").replace("e-", " × 10^−");
+      return String(x).replace("-", "−");
+    }
+
+    function render() {
+      var text = tokens.join("");
+      exprEl.textContent = text || "0";
+      exprEl.classList.toggle("empty", !text);
+      resEl.classList.remove("err", "final");
+      lastGood = null;
+      if (!text) { resEl.textContent = ""; return; }
+      try {
+        lastGood = evaluate(text);
+        resEl.textContent = "= " + fmt(lastGood);
+        if (justEvaluated) resEl.classList.add("final");
+      } catch (e) {
+        if (e instanceof CalcError) { resEl.textContent = e.message; resEl.classList.add("err"); }
+        else resEl.textContent = "";
+      }
+    }
+    function renderRecent() {
+      recentEl.innerHTML = "";
+      if (!recent.length) { var n = document.createElement("li"); n.className = "none"; n.textContent = "Nothing yet"; recentEl.appendChild(n); return; }
+      recent.forEach(function (r) {
+        var li = document.createElement("li");
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = r.expr + " = " + fmt(r.value);
+        b.title = "Use this result";
+        b.addEventListener("click", function () {
+          var a = Math.abs(r.value);
+          if (a === 0 || (a >= 1e-9 && a < 1e12)) tokens = r.value < 0 ? ["−", String(a)] : [String(a)];
+          else { exprAns = r.value; tokens = ["Ans"]; }
+          justEvaluated = false;
+          render();
+        });
+        li.appendChild(b);
+        recentEl.appendChild(li);
+      });
+    }
+
+    function press(k) {
+      var isOp = /^[+−×÷^!%²)]$/.test(k);
+      if (k === "clear") { tokens = []; exprAns = ans; justEvaluated = false; render(); return; }
+      if (k === "back") {
+        if (justEvaluated) { justEvaluated = false; }
+        tokens.pop(); render(); return;
+      }
+      if (k === "equals") {
+        if (lastGood === null) { render(); return; }
+        var text = tokens.join("");
+        ans = lastGood;
+        recent.unshift({ expr: text, value: lastGood });
+        recent = recent.slice(0, 3);
+        renderRecent();
+        justEvaluated = true;
+        render();
+        return;
+      }
+      if (justEvaluated) {
+        // after =, an operator carries on from the answer; anything else starts afresh
+        tokens = isOp ? ["Ans"] : [];
+        exprAns = ans;
+        justEvaluated = false;
+      }
+      tokens.push(k);
+      render();
+    }
+
+    calcEl.addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (!b || !calcEl.contains(b)) return;
+      if (b.dataset.k) press(b.dataset.k);
+      else if (b.dataset.mode) {
+        deg = b.dataset.mode === "deg";
+        calcEl.querySelectorAll(".mode").forEach(function (m) { m.setAttribute("aria-pressed", String(m === b)); });
+        render();
+      } else if (b.dataset.act === "copy") {
+        if (lastGood !== null && navigator.clipboard) {
+          navigator.clipboard.writeText(String(lastGood)).then(function () { flash(b, "✓ Copied"); }, function () {});
+        }
+      } else if (b.dataset.act === "board") {
+        if (lastGood === null) return;
+        var hint = boardEl.querySelector(".calc-board-hint");
+        if (hint) hint.remove();
+        var eq = document.createElement("div");
+        eq.className = "chalk-eq";
+        eq.textContent = tokens.join("").replace(/Ans/g, fmt(exprAns)) + " = " + fmt(lastGood);
+        boardEl.appendChild(eq);
+        while (boardEl.children.length > 3) boardEl.removeChild(boardEl.firstChild);
+        flash(b, "✓ On the board");
+      }
+    });
+    function flash(b, txt) {
+      var old = b.dataset.label || b.textContent;
+      b.dataset.label = old;
+      b.textContent = txt;
+      setTimeout(function () { b.textContent = old; }, 1300);
+    }
+    // Keyboard works while the calculator has focus; it never sets off page shortcuts.
+    calcEl.tabIndex = -1;
+    calcEl.addEventListener("pointerdown", function () { calcEl.focus({ preventScroll: true }); });
+    calcEl.addEventListener("keydown", function (e) {
+      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      var map = { "*": "×", "x": "×", "/": "÷", "-": "−", "+": "+", "^": "^", "(": "(", ")": ")", "!": "!", "%": "%", ".": ".", ",": ".", "e": "e", "p": "π",
+        "Enter": "equals", "=": "equals", "Backspace": "back", "Escape": "clear", "Delete": "clear" };
+      var k = /^[0-9]$/.test(e.key) ? e.key : map[e.key];
+      if (!k) return;
+      e.preventDefault();
+      e.stopPropagation();
+      if (k === "clear" && e.key === "Escape" && !tokens.length) { calcEl.blur(); return; }
+      press(k);
+      var btn = calcEl.querySelector('[data-k="' + k + '"]');
+      if (btn) { btn.classList.add("hit"); setTimeout(function () { btn.classList.remove("hit"); }, 120); }
+    });
+
+    // Start with the example from the app's screenshot
+    tokens = ["1", "2", "×", "7"];
+    render();
+  }
 })();
