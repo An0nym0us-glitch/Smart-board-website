@@ -7,15 +7,49 @@
   var isLight = function () { return root.dataset.theme === "light"; };
   var finePointer = window.matchMedia("(pointer: fine)").matches;
 
-  // Sticky nav border and scroll progress bar
+  // Calls back with true/false as `el` comes into or leaves view (with a little margin).
+  function watchVisible(el, cb, margin) {
+    if (!("IntersectionObserver" in window)) { cb(true); return; }
+    new IntersectionObserver(function (entries) { cb(entries[entries.length - 1].isIntersecting); },
+      { rootMargin: margin || "100px" }).observe(el);
+  }
+  // A requestAnimationFrame loop that only runs while `el` is on screen. `step` returns false to stop for good.
+  function visibleLoop(el, step) {
+    var visible = false, running = false, done = false;
+    function tick(now) {
+      if (!visible || done) { running = false; return; }
+      if (step(now) === false) { done = true; running = false; return; }
+      requestAnimationFrame(tick);
+    }
+    watchVisible(el, function (v) {
+      visible = v;
+      if (v && !running && !done) { running = true; requestAnimationFrame(tick); }
+    });
+  }
+
+  // Sections out of view pause their CSS animations (see .is-offscreen in styles.css)
+  Array.prototype.forEach.call(document.querySelectorAll("main > *"), function (sec) {
+    watchVisible(sec, function (v) { sec.classList.toggle("is-offscreen", !v); }, "200px");
+  });
+
+  // Sticky nav border, scroll progress bar and back-to-top ring: one scroll handler, once per frame
   var nav = document.querySelector(".nav");
   var progress = document.querySelector(".progress");
+  var toTop = document.querySelector(".to-top");
+  var scrollQueued = false;
   function onScroll() {
-    nav.classList.toggle("scrolled", window.scrollY > 8);
+    scrollQueued = false;
+    var y = window.scrollY;
     var max = document.documentElement.scrollHeight - window.innerHeight;
-    progress.style.setProperty("--p", max > 0 ? (window.scrollY / max).toFixed(4) : 0);
+    var p = max > 0 ? (y / max).toFixed(4) : 0;
+    nav.classList.toggle("scrolled", y > 8);
+    progress.style.setProperty("--p", p);
+    toTop.classList.toggle("show", y > 700);
+    toTop.style.setProperty("--p", p);
   }
-  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", function () {
+    if (!scrollQueued) { scrollQueued = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
   onScroll();
 
   // Mobile menu
@@ -59,7 +93,6 @@
     var readDust = function () { dustColour = "rgb(" + getComputedStyle(root).getPropertyValue("--dust").trim() + ")"; };
     readDust();
     document.addEventListener("themechange", readDust);
-    var heroVisible = true;
     var resizeDust = function () {
       var dpr = Math.min(window.devicePixelRatio || 1, 2);
       dust.width = hero.offsetWidth * dpr;
@@ -82,24 +115,22 @@
         tw: Math.random() * Math.PI * 2
       });
     }
-    new IntersectionObserver(function (entries) { heroVisible = entries[0].isIntersecting; }).observe(hero);
-    (function frame() {
-      if (heroVisible) {
-        var w = hero.offsetWidth, h = hero.offsetHeight;
-        dctx.clearRect(0, 0, dust.width, dust.height);
-        motes.forEach(function (m) {
-          m.x += m.vx; m.y += m.vy; m.tw += 0.02;
-          if (m.y < -5) { m.y = h + 5; m.x = Math.random() * w; }
-          if (m.x < -5) m.x = w + 5; else if (m.x > w + 5) m.x = -5;
-          dctx.globalAlpha = m.a * (0.6 + 0.4 * Math.sin(m.tw));
-          dctx.fillStyle = dustColour;
-          dctx.beginPath();
-          dctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
-          dctx.fill();
-        });
-      }
-      requestAnimationFrame(frame);
-    })();
+    var dustW = hero.offsetWidth, dustH = hero.offsetHeight;
+    if ("ResizeObserver" in window) new ResizeObserver(function () { dustW = hero.offsetWidth; dustH = hero.offsetHeight; }).observe(hero);
+    visibleLoop(hero, function () {
+      var w = dustW, h = dustH;
+      dctx.clearRect(0, 0, dust.width, dust.height);
+      dctx.fillStyle = dustColour;
+      motes.forEach(function (m) {
+        m.x += m.vx; m.y += m.vy; m.tw += 0.02;
+        if (m.y < -5) { m.y = h + 5; m.x = Math.random() * w; }
+        if (m.x < -5) m.x = w + 5; else if (m.x > w + 5) m.x = -5;
+        dctx.globalAlpha = m.a * (0.6 + 0.4 * Math.sin(m.tw));
+        dctx.beginPath();
+        dctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+        dctx.fill();
+      });
+    });
   }
 
   // ---------- Hero: board you can draw on ----------
@@ -317,8 +348,13 @@
     }, { threshold: 0.4 }).observe(tour);
   }
   tilt(frameEl, frameEl, 6, "0deg", "0deg");
-  // Preload screenshots so switching tabs is instant
-  tabs.forEach(function (t) { new Image().src = t.dataset.src; });
+  // Preload the other screenshots once the tour is near, so switching tabs is instant
+  var preloaded = false;
+  watchVisible(tour, function (v) {
+    if (!v || preloaded) return;
+    preloaded = true;
+    tabs.forEach(function (t) { new Image().src = t.dataset.src; });
+  }, "600px");
 
   // ---------- Copy build commands ----------
   document.querySelectorAll(".copy").forEach(function (btn) {
@@ -396,16 +432,6 @@
     });
   }
 
-  // ---------- Back to top ring ----------
-  var toTop = document.querySelector(".to-top");
-  function onScrollTop() {
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    toTop.classList.toggle("show", window.scrollY > 700);
-    toTop.style.setProperty("--p", max > 0 ? (window.scrollY / max).toFixed(4) : 0);
-  }
-  window.addEventListener("scroll", onScrollTop, { passive: true });
-  onScrollTop();
-
   // ---------- Demo: function graph ----------
   var ga = document.getElementById("g-a"), gb = document.getElementById("g-b");
   var gPath = document.getElementById("g-path"), gArea = document.getElementById("g-area"), gDot = document.getElementById("g-dot");
@@ -430,12 +456,13 @@
   gb.addEventListener("input", plot);
   plot();
   var dotT = 0;
-  (function moveDot() {
-    var x = -SPAN / 2 + ((dotT += reduceMotion ? 0 : 0.012) % SPAN);
+  function placeDot() {
+    var x = -SPAN / 2 + (dotT % SPAN);
     gDot.setAttribute("cx", sx(x).toFixed(1));
     gDot.setAttribute("cy", sy(gy(x)).toFixed(1));
-    if (!reduceMotion) requestAnimationFrame(moveDot);
-  })();
+  }
+  placeDot();
+  if (!reduceMotion) visibleLoop(gPath.ownerSVGElement, function () { dotT += 0.012; placeDot(); });
 
   // ---------- Demo: protractor ----------
   var psvg = document.querySelector(".protractor");
@@ -479,11 +506,10 @@
   psvg.addEventListener("pointercancel", function () { pDrag = false; });
   if (pAuto) {
     var p0 = performance.now();
-    (function sweep(now) {
-      if (!pAuto) return;
+    visibleLoop(psvg, function (now) {
+      if (!pAuto) return false;
       setAngle(90 + 60 * Math.sin((now - p0) / 1400));
-      requestAnimationFrame(sweep);
-    })(p0);
+    });
   }
 
   // ---------- Demo: equation typing ----------
@@ -493,7 +519,10 @@
     eqSrc.textContent = LATEX;
     eqOut.classList.add("show");
   } else {
-    (function typeLoop() {
+    var eqVisible = false, eqBusy = false;
+    var typeLoop = function () {
+      if (!eqVisible) { eqBusy = false; return; } // resumes when the tile is back in view
+      eqBusy = true;
       var i = 0;
       eqSrc.textContent = "";
       eqOut.classList.remove("show");
@@ -505,7 +534,8 @@
           setTimeout(typeLoop, 3800);
         }
       }, 55);
-    })();
+    };
+    watchVisible(eqSrc, function (v) { eqVisible = v; if (v && !eqBusy) typeLoop(); });
   }
 
   // ---------- Command palette (Ctrl+K) ----------
@@ -515,7 +545,8 @@
   function go(hash) { return function () { document.querySelector(hash).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }; }
   function open_(url) { return function () { window.open(url, "_blank", "noopener"); }; }
   var commands = [
-    { icon: "✨", label: "What's new in v0.3.0", hint: "Section", run: go("#new") },
+    { icon: "✨", label: "What's new in v0.3.1", hint: "Section", run: go("#new") },
+    { icon: "📏", label: "Try the ribbon size", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var r = document.getElementById("rs"); if (r) r.focus({ preventScroll: true }); }, 500); } },
     { icon: "🧮", label: "Try the calculator", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var c = document.getElementById("calc"); if (c) c.focus({ preventScroll: true }); }, 500); } },
     { icon: "★", label: "Features", hint: "Section", run: go("#features") },
     { icon: "▶", label: "Live demos", hint: "Section", run: go("#demos") },
@@ -866,5 +897,53 @@
     // Start with the example from the app's screenshot
     tokens = ["1", "2", "×", "7"];
     render();
+  }
+
+  // ---------- Demo: ribbon size (v0.3.1) ----------
+  var rribbon = document.getElementById("rribbon");
+  if (rribbon) {
+    var rs = document.getElementById("rs"), rsOut = document.getElementById("rs-out"), rsNote = document.getElementById("rs-note");
+    // like the app: when the ribbon is too wide, Fit goes first, then zoom, then File / Insert / Edit
+    var HIDE_NAMES = { 1: "Fit", 2: "the zoom buttons", 3: "File / Insert / Edit" };
+    var hideables = Array.prototype.slice.call(rribbon.querySelectorAll("[data-hide]"));
+    function fitRibbon() {
+      hideables.forEach(function (el) { el.hidden = false; });
+      var hidden = [];
+      for (var level = 1; level <= 3; level++) {
+        if (rribbon.scrollWidth <= rribbon.clientWidth + 1) break;
+        hideables.forEach(function (el) { if (+el.dataset.hide === level) el.hidden = true; });
+        hidden.push(HIDE_NAMES[level]);
+      }
+      return hidden;
+    }
+    function setRibbon(v, save) {
+      v = Math.max(60, Math.min(150, Math.round(v / 5) * 5));
+      rs.value = v;
+      rribbon.style.setProperty("--rs", v / 100);
+      rsOut.textContent = v + " %";
+      rs.style.setProperty("--fill", ((v - 60) / 90 * 100) + "%");
+      var hidden = fitRibbon();
+      rsNote.innerHTML = "";
+      var b = document.createElement("b");
+      if (hidden.length) {
+        b.textContent = hidden.join(", ");
+        rsNote.append("Too wide for this board: ", b, " moved into More.");
+      } else if (v === 100) {
+        rsNote.textContent = "Normal ribbon size. Drag the slider: only the ribbon changes.";
+      } else {
+        b.textContent = v < 100 ? "Slimmer ribbon" : "Bigger ribbon";
+        rsNote.append(b, " — the Settings menu keeps its size.");
+      }
+      if (save) { try { localStorage.setItem("cb-ribbon", String(v)); } catch (e) {} }
+    }
+    rs.addEventListener("input", function () { setRibbon(+rs.value, true); });
+    document.getElementById("rs-reset").addEventListener("click", function () { setRibbon(100, true); });
+    // remembered, like in the app
+    var savedRibbon = 100;
+    try { savedRibbon = +(localStorage.getItem("cb-ribbon") || 100) || 100; } catch (e) {}
+    setRibbon(savedRibbon, false);
+    if ("ResizeObserver" in window) new ResizeObserver(function () { setRibbon(+rs.value, false); }).observe(rribbon);
+    // labels get wider once the web font arrives, so measure again then
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { setRibbon(+rs.value, false); });
   }
 })();

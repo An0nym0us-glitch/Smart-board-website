@@ -17,7 +17,7 @@
   --wrap: 1160px;
   --font: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
   --hand: "Caveat", "Segoe Print", cursive;
-  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
   --hover: #262c29;
   --accent-soft: #2a3a32;
   --border-3: #3a4440;
@@ -326,7 +326,6 @@ details p { padding: 0 22px 20px; margin: 0; color: var(--muted); }
 .reveal.in { opacity: 1; translate: 0 0; }
 
 /* ---------- Motion & polish ---------- */
-@property --angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
 
 .progress {
   position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 60;
@@ -347,7 +346,7 @@ details p { padding: 0 22px 20px; margin: 0; color: var(--muted); }
 .hero { overflow: hidden; isolation: isolate; }
 .hero-grid { position: relative; z-index: 1; }
 .aurora { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: var(--aurora); animation: float 18s ease-in-out infinite alternate; }
+.aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: var(--aurora); will-change: transform; animation: float 18s ease-in-out infinite alternate; }
 .aurora i:nth-child(1) { width: 520px; height: 520px; background: rgba(95, 211, 165, .35); top: -160px; right: -80px; }
 .aurora i:nth-child(2) { width: 420px; height: 420px; background: rgba(79, 179, 255, .22); bottom: -200px; left: -120px; animation-duration: 22s; animation-delay: -6s; }
 .aurora i:nth-child(3) { width: 300px; height: 300px; background: rgba(255, 180, 84, .14); top: 30%; left: 40%; animation-duration: 26s; animation-delay: -12s; }
@@ -455,18 +454,20 @@ details p { padding: 0 22px 20px; margin: 0; color: var(--muted); }
 #shot-img { transition: opacity .25s, transform .4s ease, filter .25s; }
 #shot-img.swap { transform: scale(.98); filter: blur(4px); }
 
-/* download: rotating glow border */
+/* download: rotating glow border. Only a transform animates, so it stays on the compositor
+   instead of repainting a blurred gradient every frame. */
 .dl-glow {
   position: relative; max-width: 824px; margin: 0 auto; padding: 2px; border-radius: 30px;
-  background: conic-gradient(from var(--angle), rgba(95, 211, 165, .1), var(--accent), rgba(79, 179, 255, .6), rgba(95, 211, 165, .1) 40%, rgba(95, 211, 165, .1));
-  animation: spin 6s linear infinite;
+  overflow: hidden; isolation: isolate; box-shadow: 0 0 80px -24px rgba(95, 211, 165, .5);
 }
 .dl-glow::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
-  background: inherit; filter: blur(30px); opacity: .5;
+  content: ""; position: absolute; left: 50%; top: 50%; z-index: -1; width: max(160%, 1100px); aspect-ratio: 1;
+  translate: -50% -50%; will-change: transform;
+  background: conic-gradient(rgba(95, 211, 165, .1), var(--accent), rgba(79, 179, 255, .6), rgba(95, 211, 165, .1) 40%, rgba(95, 211, 165, .1));
+  animation: spin 6s linear infinite;
 }
-.dl-glow .dl-card { border: 0; }
-@keyframes spin { to { --angle: 360deg; } }
+.dl-glow .dl-card { border: 0; border-radius: 28px; }
+@keyframes spin { to { transform: rotate(1turn); } }
 .dl-card img { animation: bob 5s ease-in-out infinite; }
 .steps li { transition: transform .25s ease, border-color .25s; }
 .steps li:hover { transform: translateY(-3px); border-color: rgba(95, 211, 165, .5); }
@@ -757,7 +758,8 @@ a.eyebrow:hover .arrow { transform: translateX(3px); }
 .print-alt { font-size: .88rem !important; margin-top: 4px !important; }
 
 @media (max-width: 960px) {
-  .new-grid { grid-template-columns: 1fr; gap: 40px; }
+  .new-grid, .ribbon-block { grid-template-columns: 1fr; gap: 40px; }
+  .calc-block { margin-top: 80px; }
   .calc-wrap { max-width: 460px; width: 100%; margin: 0 auto; }
 }
 @media (max-width: 400px) {
@@ -765,6 +767,73 @@ a.eyebrow:hover .arrow { transform: translateX(3px); }
   .calc-keys { gap: 6px; }
   .k { height: 42px; font-size: .9rem; }
   .k-fn { font-size: .76rem; }
+}
+
+/* ---------- Performance: sections out of view pause their animations ---------- */
+.is-offscreen, .is-offscreen *, .is-offscreen *::before, .is-offscreen *::after { animation-play-state: paused !important; }
+
+/* ---------- Ribbon size demo (v0.3.1) ---------- */
+.ribbon-block { grid-template-columns: 1fr; gap: 44px; }
+.ribbon-block .new-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; align-items: start; }
+.ribbon-block .new-copy > * { grid-column: 1; }
+.ribbon-block .new-copy .checks { grid-column: 2; grid-row: 1 / span 4; margin: 0; align-self: center; }
+.calc-block { margin-top: 110px; }
+.rdemo { min-width: 0; }
+.rdemo-board {
+  position: relative; height: 290px; overflow: hidden; color: var(--chalk);
+  background: var(--board); border: 10px solid var(--frame); border-bottom: 0; border-radius: 18px 18px 0 0;
+}
+.rdemo-doodle { position: absolute; right: 24px; top: 22px; width: min(52%, 420px); opacity: .8; }
+.rs-pop {
+  position: absolute; left: 12px; bottom: 12px; width: min(250px, calc(100% - 24px));
+  background: var(--surface-2); color: var(--text); border: 1px solid var(--border-2); border-radius: 16px;
+  padding: 12px 14px 14px; box-shadow: 0 24px 40px -20px rgba(0, 0, 0, .65);
+}
+.rs-head { display: flex; justify-content: space-between; align-items: center; font: 700 .9rem var(--font); margin-bottom: 8px; }
+.rs-head span { display: inline-flex; align-items: center; gap: 6px; }
+.rs-head svg { width: 16px; height: 16px; }
+.rs-head .rs-x { color: var(--muted); }
+.rs-cap { font: 700 .62rem var(--font); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.rs-row { display: flex; justify-content: space-between; font-size: .85rem; font-weight: 600; }
+.rs-row output { color: var(--accent); font-variant-numeric: tabular-nums; }
+.rs-reset {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; padding: 6px 12px; border: 0; border-radius: 999px; cursor: pointer;
+  background: var(--hover); color: var(--text); font: 600 .78rem var(--font);
+}
+.rs-reset svg { width: 14px; height: 14px; }
+.rs-reset:hover { color: var(--accent); }
+.rdemo-ribbon {
+  --rs: 1; --u: 1px;
+  display: flex; align-items: center; gap: calc(3 * var(--u) * var(--rs));
+  overflow-x: auto; overflow-y: hidden; scrollbar-width: thin;
+  height: calc(60 * var(--u) * var(--rs)); padding: 0 calc(6 * var(--u) * var(--rs));
+  background: var(--surface); border: 10px solid var(--frame); border-top: 1px solid var(--border); border-radius: 0 0 18px 18px;
+}
+.rgroup { display: flex; align-items: center; gap: calc(1 * var(--u) * var(--rs)); flex: none; }
+.rgroup[hidden], .rsep[hidden] { display: none; }
+.rb {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(3 * var(--u) * var(--rs));
+  min-width: calc(34 * var(--u) * var(--rs)); height: calc(48 * var(--u) * var(--rs)); padding: 0 calc(3 * var(--u) * var(--rs));
+  border-radius: calc(10 * var(--u) * var(--rs)); color: var(--muted);
+}
+.rb svg { width: calc(19 * var(--u) * var(--rs)); height: calc(19 * var(--u) * var(--rs)); flex: none; }
+.rb small { font: 500 calc(9 * var(--u) * var(--rs))/1 var(--font); white-space: nowrap; }
+.rb.on { background: var(--accent-soft); color: var(--accent); }
+.rb.off { opacity: .4; }
+.rb-icon { min-width: calc(26 * var(--u) * var(--rs)); }
+.rpill { font: 600 calc(10.5 * var(--u) * var(--rs))/1 var(--font); background: var(--hover); color: var(--text); padding: calc(7 * var(--u) * var(--rs)) calc(10 * var(--u) * var(--rs)); border-radius: 999px; white-space: nowrap; }
+.rsep { flex: none; width: 1px; height: calc(26 * var(--u) * var(--rs)); background: var(--border); margin: 0 calc(2 * var(--u) * var(--rs)); }
+.rspacer { flex: 1 1 0; min-width: calc(4 * var(--u) * var(--rs)); }
+.rdemo-note { margin: 12px 0 0; text-align: center; font-size: .88rem; color: var(--muted); min-height: 1.4em; }
+.rdemo-note b { color: var(--accent); }
+
+@media (max-width: 960px) {
+  .ribbon-block .new-copy { grid-template-columns: 1fr; }
+  .ribbon-block .new-copy .checks { grid-column: 1; grid-row: auto; margin: 20px 0 6px; }
+}
+@media (max-width: 760px) {
+  .rdemo-ribbon { --u: .62px; }
+  .rdemo-board { height: 250px; }
 }
 
 /* ---------- Responsive ---------- */
