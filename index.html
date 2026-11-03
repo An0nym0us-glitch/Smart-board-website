@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ClassBoard — the open-source digital whiteboard for classrooms</title>
-  <meta name="description" content="ClassBoard is a free, open-source digital whiteboard for large interactive classroom displays. Ten-point touch, geometry instruments, equations, graphs, a scientific calculator, PDF and PowerPoint import. Windows 10/11, fully offline.">
+  <meta name="description" content="ClassBoard is a free, open-source digital whiteboard for large interactive classroom displays. Ten-point touch, geometry instruments, equations, graphs, a scientific calculator, PDF and PowerPoint import. For Windows 10/11, the web browser and Android.">
   <meta name="theme-color" content="#141816">
   <link rel="canonical" href="https://an0nym0us-glitch.github.io/Smart-board-website/">
   <meta property="og:title" content="ClassBoard — the open-source digital whiteboard for classrooms">
-  <meta property="og:description" content="Ten-point touch, geometry instruments, equations, graphs and a calculator. Free, offline, made for interactive classroom displays.">
+  <meta property="og:description" content="Ten-point touch, geometry instruments, equations, graphs and a calculator. Free, for Windows, the browser and Android, made for interactive classroom displays.">
   <meta property="og:image" content="https://an0nym0us-glitch.github.io/Smart-board-website/assets/img/og.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
   <!-- fonts load without blocking the first paint; system fonts stand in until they arrive -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-  <link rel="stylesheet" href="styles.css?v=0.3.1">
+  <link rel="stylesheet" href="styles.css?v=0.3.1-2">
   <script>
     try { var t = localStorage.getItem("cb-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
@@ -35,7 +35,7 @@
     "@type": "SoftwareApplication",
     "name": "ClassBoard",
     "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Windows 10, Windows 11",
+    "operatingSystem": "Windows 10, Windows 11, Android 7.0 or newer, web browser",
     "softwareVersion": "0.3.1",
     "description": "Free, open-source digital whiteboard for interactive classroom displays: ten-point touch, geometry instruments, equations, graphs and a calculator. Works fully offline.",
     "url": "https://an0nym0us-glitch.github.io/Smart-board-website/",
@@ -99,7 +99,7 @@
         <a href="#demos">Demos</a>
         <a href="#tour">Tour</a>
         <a href="#touch">Touch</a>
-        <a href="#download">Download</a>
+        <a href="#platforms">Download</a>
         <a href="#guide">Guide</a>
         <a href="#build">Build</a>
         <a class="gh" href="https://github.com/An0nym0us-glitch/Smart-board" target="_blank" rel="noopener">
@@ -117,20 +117,23 @@
       <canvas class="dust" aria-hidden="true"></canvas>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <a class="eyebrow" href="#new"><span class="dot"></span> v0.3.1 · New: Ribbon size <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="eyebrow" href="#platforms"><span class="dot"></span> New: ClassBoard in your browser &amp; on Android <span class="arrow" aria-hidden="true">→</span></a>
           <h1><span class="w">The</span> <span class="w">whiteboard</span> <span class="w">your</span><br><span class="chalk">classroom deserves.</span></h1>
           <p class="lead">ClassBoard is a digital whiteboard built for large interactive classroom displays.
-            Ten-point touch, real geometry instruments, equations, graphs and a calculator — all fully offline on Windows&nbsp;10/11.</p>
+            Ten-point touch, real geometry instruments, equations, graphs and a calculator — on Windows, in your browser or on Android.</p>
           <div class="cta-row">
             <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/download/v0.3.1/ClassBoard-Setup-0.3.1-x64.exe">
               <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10 4.5v7H3zm0 13 7 1v-7H3zM11 4.4 21 3v8.5H11zm0 15.2L21 21v-8.5H11z"/></svg>
               Download for Windows
             </a>
-            <a class="btn btn-ghost" href="https://github.com/An0nym0us-glitch/Smart-board" target="_blank" rel="noopener">View source</a>
+            <a class="btn btn-ghost" href="https://an0nym0us-glitch.github.io/Smart-board-web/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              Open in browser
+            </a>
           </div>
           <ul class="hero-meta">
-            <li>Windows 10 / 11 · x64</li>
-            <li>Works fully offline</li>
+            <li>Windows · Web · Android</li>
+            <li>No account needed</li>
             <li>Free &amp; open source (MIT)</li>
           </ul>
         </div>
@@ -177,7 +180,7 @@
         <div><strong data-count="10" data-suffix="">10</strong><span>touch points at once</span></div>
         <div><strong data-count="15" data-suffix="+">15+</strong><span>shapes &amp; constructions</span></div>
         <div><strong data-count="4" data-suffix="">4</strong><span>real geometry instruments</span></div>
-        <div><strong data-count="0" data-suffix="">0</strong><span>internet required</span></div>
+        <div><strong data-count="3" data-suffix="">3</strong><span>platforms: Windows · Web · Android</span></div>
       </div>
     </section>
 
@@ -188,6 +191,71 @@
         <span>Pen</span><span>Highlighter</span><span>✨ Magic Highlighter</span><span>Eraser</span><span>Palm wipe</span><span>Ruler</span><span>Protractor</span><span>Set square</span><span>Compass</span><span>Shapes</span><span>Measurements</span><span>Equations</span><span>Function graphs</span><span>🧮 Calculator</span><span>Tables</span><span>Templates</span><span>PDF import</span><span>PowerPoint export</span><span>Autosave</span>
       </div>
     </div>
+
+    <!-- PLATFORMS -->
+    <section class="section platforms" id="platforms">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="kicker">Windows · Web · Android</p>
+          <h2>One board, <span class="grad">three ways</span> to run it.</h2>
+          <p>The same board, the same tools and the same <code>.classboard</code> lesson files, so a lesson made on one opens on the others.</p>
+        </header>
+        <div class="plat-grid">
+          <article class="plat">
+            <div class="plat-ico"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M3 5.5 10 4.5v7H3zm0 13 7 1v-7H3zM11 4.4 21 3v8.5H11zm0 15.2L21 21v-8.5H11z"/></svg></div>
+            <h3>Windows</h3>
+            <p class="plat-sub">Windows 10 / 11 · 64-bit · <span data-version>v0.3.1</span></p>
+            <p>The full app for classroom PCs and smart boards. Install it once and it works fully offline.</p>
+            <ul class="plat-list">
+              <li>Installer with Start menu entry, desktop shortcut and the PDF user guide</li>
+              <li>Imports PowerPoint slides (with an office suite installed)</li>
+              <li>Updates install over the old version and keep your lessons</li>
+            </ul>
+            <div class="plat-actions">
+              <a class="btn btn-primary" data-dl href="https://github.com/An0nym0us-glitch/Smart-board/releases/download/v0.3.1/ClassBoard-Setup-0.3.1-x64.exe">Download for Windows</a>
+              <a class="plat-link" href="#download">Install steps</a>
+            </div>
+          </article>
+          <article class="plat plat-web">
+            <span class="new-badge plat-badge">New</span>
+            <div class="plat-ico"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.6 2.8 3.9 5.8 3.9 9s-1.3 6.2-3.9 9c-2.6-2.8-3.9-5.8-3.9-9S9.4 5.8 12 3z" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+            <h3>In your browser</h3>
+            <p class="plat-sub">Chrome · Edge · Firefox · Safari</p>
+            <p>The same ClassBoard app, running in the browser. Nothing to install: open it on a computer, board or tablet.</p>
+            <ul class="plat-list">
+              <li><b>Save</b> keeps the lesson in the browser and downloads a <code>.classboard</code> file</li>
+              <li>Exports (PDF, PowerPoint, PNG) are downloaded</li>
+              <li>PowerPoint import isn't available: save the slides as PDF and import the PDF</li>
+            </ul>
+            <div class="plat-actions">
+              <a class="btn btn-primary" href="https://an0nym0us-glitch.github.io/Smart-board-web/" target="_blank" rel="noopener">Open ClassBoard</a>
+              <a class="plat-link" href="https://github.com/An0nym0us-glitch/Smart-board-web/blob/HEAD/docs/WEB.md" target="_blank" rel="noopener">How saving works</a>
+            </div>
+          </article>
+          <article class="plat plat-android">
+            <span class="new-badge plat-badge">New</span>
+            <div class="plat-ico"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+            <h3>Android</h3>
+            <p class="plat-sub">Android 7.0 or newer</p>
+            <p>A native Android app for tablets, interactive panels and phones. It works fully offline.</p>
+            <ol class="plat-steps">
+              <li>Sign in to GitHub and open the newest <b>Android APK</b> build</li>
+              <li>Download <b>ClassBoard-release-apk</b> under <b>Artifacts</b></li>
+              <li>Unzip it, open <code>app-release.apk</code> and allow installing</li>
+            </ol>
+            <div class="plat-actions">
+              <a class="btn btn-primary" href="https://github.com/An0nym0us-glitch/Smart-board-for-android/actions/workflows/android.yml" target="_blank" rel="noopener">Get the Android APK</a>
+              <a class="plat-link" href="https://github.com/An0nym0us-glitch/Smart-board-for-android" target="_blank" rel="noopener">Source code</a>
+            </div>
+          </article>
+        </div>
+        <figure class="web-shot">
+          <div class="window-bar"><i></i><i></i><i></i><span class="web-url">an0nym0us-glitch.github.io/Smart-board-web</span></div>
+          <img src="assets/img/web-version.webp" alt="ClassBoard running in a web browser, with a line drawn on the board and the More menu open" width="1366" height="800" loading="lazy" decoding="async">
+          <figcaption>The web version running in Chrome: the same ribbon, the same More menu, the same tools.</figcaption>
+        </figure>
+      </div>
+    </section>
 
     <!-- WHAT'S NEW -->
     <section class="section whatsnew" id="new">
@@ -549,6 +617,7 @@
             <li><span>3</span><div>Open ClassBoard from the Start menu and start drawing</div></li>
           </ol>
           <p class="update-note">Already have ClassBoard? Run the new installer over it — your lessons and settings are kept.</p>
+          <p class="update-note">Not on Windows? <a href="https://an0nym0us-glitch.github.io/Smart-board-web/" target="_blank" rel="noopener">Open it in your browser</a> or <a href="#platforms">get the Android app</a>.</p>
         </div>
         </div>
       </div>
@@ -571,7 +640,7 @@
           <div class="guide-body">
             <span class="chip">Step-by-step manual · v0.3.0</span>
             <h3>How to use ClassBoard</h3>
-            <p>The illustrated user manual for ClassBoard 0.3.0. It walks you through the app from installing it to the last keyboard shortcut, with a screenshot next to every menu, the new Calculator, and a troubleshooting table at the end. It is also installed with the app.</p>
+            <p>The illustrated user manual for ClassBoard 0.3.0. It walks you through the app from installing it to the last keyboard shortcut, with a screenshot next to every menu, the new Calculator, and a troubleshooting table at the end. It is also installed with the app, and now has a chapter on the web and Android versions.</p>
             <ol class="chapters">
                 <li>Installing and starting</li>
                 <li>The screen and the ribbon</li>
@@ -590,8 +659,9 @@
                 <li>Settings</li>
                 <li>Keyboard shortcuts</li>
                 <li>Tips and troubleshooting</li>
+                <li>In the browser and on Android <span class="new-badge">New</span></li>
             </ol>
-            <ul class="guide-meta"><li>18 pages</li><li>PDF · 0.9 MB</li><li>A4</li><li>17 chapters</li></ul>
+            <ul class="guide-meta"><li>20 pages</li><li>PDF · 1.1 MB</li><li>A4</li><li>18 chapters</li></ul>
             <div class="guide-actions">
               <a class="btn btn-primary" href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
@@ -602,7 +672,7 @@
                 Download
               </a>
             </div>
-            <p class="print-alt">🖨 Printing? Get the <a href="guides/ClassBoard-How-to-use-compact.pdf" target="_blank" rel="noopener">compact 9-page version</a> (0.9 MB).</p>
+            <p class="print-alt">🖨 Printing? Get the <a href="guides/ClassBoard-How-to-use-compact.pdf" target="_blank" rel="noopener">compact 10-page version</a> (1.0 MB).</p>
           </div>
         </article>
 
@@ -614,8 +684,8 @@
             <div class="guide-body">
               <span class="chip">Full colour · for screens</span>
               <h3>ClassBoard Guide</h3>
-              <p>The complete guide with dark board screenshots, just as the app looks in class. Best for reading on a laptop, tablet or projector.</p>
-              <ul class="guide-meta"><li>12 pages</li><li>PDF · 1.0 MB</li></ul>
+              <p>The complete guide with dark board screenshots, just as the app looks in class. Best for reading on a laptop, tablet or projector. Now includes the web and Android versions.</p>
+              <ul class="guide-meta"><li>13 pages</li><li>PDF · 1.2 MB</li></ul>
               <div class="guide-actions">
                 <a class="btn btn-primary" href="guides/ClassBoard-Guide.pdf" target="_blank" rel="noopener">
                   <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
@@ -637,8 +707,8 @@
             <div class="guide-body">
               <span class="chip">Printer friendly · less ink</span>
               <h3>ClassBoard Guide — Ink Saver</h3>
-              <p>The same guide made for printing: light backgrounds, light screenshots and no big colour blocks, so it uses far less ink. Adds a mini glossary and a lined notes page.</p>
-              <ul class="guide-meta"><li>12 pages</li><li>PDF · 0.9 MB</li><li>A4</li></ul>
+              <p>The same guide made for printing: light backgrounds, light screenshots and no big colour blocks, so it uses far less ink. Adds a mini glossary, a lined notes page and the web and Android versions.</p>
+              <ul class="guide-meta"><li>13 pages</li><li>PDF · 1.1 MB</li><li>A4</li></ul>
               <div class="guide-actions">
                 <a class="btn btn-primary" href="guides/ClassBoard-Guide-InkSaver.pdf" target="_blank" rel="noopener">
                   <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4v-7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7h-3M7 14h10v7H7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
@@ -668,6 +738,8 @@
             <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/ARCHITECTURE.md" target="_blank" rel="noopener">Architecture →</a>
             <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/FILE_FORMAT.md" target="_blank" rel="noopener">File format →</a>
             <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/docs/BUILDING.md" target="_blank" rel="noopener">Building &amp; packaging →</a>
+            <a href="https://github.com/An0nym0us-glitch/Smart-board-web/blob/HEAD/docs/WEB.md" target="_blank" rel="noopener">Web version (WebAssembly) →</a>
+            <a href="https://github.com/An0nym0us-glitch/Smart-board-for-android" target="_blank" rel="noopener">Android version (Kotlin) →</a>
           </div>
         </div>
         <div class="code-card">
@@ -705,15 +777,27 @@ ctest --test-dir build --output-on-failure
         </details>
         <details>
           <summary>Does it need an internet connection?</summary>
-          <p>No. ClassBoard works fully offline, including the Magic Equation Maker's handwriting recognition.</p>
+          <p>The Windows and Android apps work fully offline, including the Magic Equation Maker's handwriting recognition. The web version is opened from the internet in your browser.</p>
         </details>
         <details>
           <summary>Which displays does it work with?</summary>
-          <p>Any Windows 10/11 PC — from a laptop with a mouse to a large interactive panel. On touch screens it supports as many touch points as the board reports (usually 10 or 20) plus stylus pressure.</p>
+          <p>Any Windows 10/11 PC — from a laptop with a mouse to a large interactive panel — plus Android 7.0+ tablets and panels, and any device with a current browser through the web version. On touch screens it supports as many touch points as the board reports (usually 10 or 20) plus stylus pressure.</p>
         </details>
         <details>
           <summary>Can I use my existing PDFs and PowerPoint slides?</summary>
           <p>Yes. Import PDFs (every page keeps its size and aspect ratio) and .ppt / .pptx files (every slide becomes a page), then annotate on top. Export back to vector PDF, .pptx or PNG.</p>
+        </details>
+        <details>
+          <summary>Can I use ClassBoard without installing anything?</summary>
+          <p>Yes. <a href="https://an0nym0us-glitch.github.io/Smart-board-web/" target="_blank" rel="noopener">Open the web version</a> in Chrome, Edge, Firefox or Safari. <b>Save</b> keeps the lesson in the browser and downloads a <code>.classboard</code> file. Clearing the browser's site data removes the lessons kept there, so keep the downloaded files.</p>
+        </details>
+        <details>
+          <summary>Is there an Android version?</summary>
+          <p>Yes, for Android 7.0 or newer (tablets, interactive panels and phones). Sign in to GitHub, open the newest <a href="https://github.com/An0nym0us-glitch/Smart-board-for-android/actions/workflows/android.yml" target="_blank" rel="noopener">Android APK build</a>, download <b>ClassBoard-release-apk</b> under Artifacts, unzip it and open <code>app-release.apk</code> on the device.</p>
+        </details>
+        <details>
+          <summary>Can I move a lesson between Windows, the browser and Android?</summary>
+          <p>Yes. All three use the same <code>.classboard</code> lesson files, so a lesson saved on one opens on the others.</p>
         </details>
         <details>
           <summary>The buttons are too big (or too small) on our display. Can I change them?</summary>
@@ -747,6 +831,8 @@ ctest --test-dir build --output-on-failure
         <a href="guides/ClassBoard-How-to-use.pdf" target="_blank" rel="noopener">How to use (PDF)</a>
         <a href="guides/ClassBoard-Guide.pdf" target="_blank" rel="noopener">Guide (PDF)</a>
         <a href="https://github.com/An0nym0us-glitch/Smart-board/issues" target="_blank" rel="noopener">Report an issue</a>
+        <a href="https://an0nym0us-glitch.github.io/Smart-board-web/" target="_blank" rel="noopener">Web version</a>
+        <a href="https://github.com/An0nym0us-glitch/Smart-board-for-android" target="_blank" rel="noopener">Android app</a>
         <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener">Third-party notices</a>
         <a href="https://github.com/An0nym0us-glitch/Smart-board/blob/HEAD/LICENSE" target="_blank" rel="noopener">License</a>
       </nav>
@@ -770,6 +856,6 @@ ctest --test-dir build --output-on-failure
     </div>
   </dialog>
 
-  <script src="main.js?v=0.3.1"></script>
+  <script src="main.js?v=0.3.1-2"></script>
 </body>
 </html>

@@ -9,14 +9,16 @@ follow the app's *Blackboard Dark* theme, and the screenshots and logo come from
 ## Files
 
 ```text
-index.html       the page: hero, what's new (ribbon size and calculator demos), features, live demos, screenshot tour,
+index.html       the page: hero, Windows / web / Android downloads, what's new (ribbon size and calculator
+                 demos), features, live demos, screenshot tour,
                  touch/shortcuts, download, guides, build, FAQ
 styles.css       all styling: blackboard (dark) and whiteboard (light) themes, responsive down to
                  phone width, respects reduced motion
 main.js          drawable hero board, live demos (graph, protractor, equation, calculator, ribbon size), Ctrl+K command
                  palette, theme switch, scroll effects, latest-release lookup
-guides/          PDFs: "How to use ClassBoard" manual (full and compact, from the app's docs/),
-                 the ClassBoard guide in full colour for screens, and its ink-saver edition
+guides/          PDFs: "How to use ClassBoard" manual (full and compact), the ClassBoard guide in full
+                 colour for screens, and its ink-saver edition. All four include a chapter on the
+                 web and Android versions (added on top of the app's docs/ PDFs).
 assets/img/      app screenshots and guide covers (WebP), logo, social preview image (og.jpg), touch icon
 favicon.ico      app icon
 robots.txt, sitemap.xml   for search engines
@@ -31,7 +33,12 @@ When the app has a new release:
 1. In `index.html`, update the installer links, `data-version`, the hero badge, the JSON-LD
    `softwareVersion` / `downloadUrl` and the "What's new" section.
 2. Bump the `?v=` on `styles.css` and `main.js` so browsers fetch the new files straight away.
-3. Copy the manuals from the app's `docs/` folder into `guides/` if they changed.
+3. Copy the manuals from the app's `docs/` folder into `guides/` if they changed, then add the
+   web and Android chapter to them again (they don't have it in the app repo).
+
+The three versions live in separate repositories: the Windows app in `Smart-board`, the web
+version in `Smart-board-web` (published at an0nym0us-glitch.github.io/Smart-board-web) and the
+Android app in `Smart-board-for-android` (APK from its "Android APK" Actions run).
 
 ## Performance notes
 

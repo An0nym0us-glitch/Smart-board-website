@@ -240,7 +240,7 @@
   var counters = document.querySelectorAll("[data-count]");
   var countUp = function (el) {
     var target = +el.dataset.count;
-    var from = target === 0 ? 100 : 0; // "0 internet required" counts down
+    var from = 0;
     var suffix = el.dataset.suffix || "";
     var t0 = performance.now(), dur = 1400;
     (function step(now) {
@@ -252,7 +252,7 @@
   };
 
   // ---------- Reveal on scroll (staggered) ----------
-  var groups = [".card", ".tile", ".guide-card", ".new-copy", ".calc-wrap", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
+  var groups = [".card", ".tile", ".plat", ".guide-card", ".new-copy", ".calc-wrap", ".section-head", ".two-col > div", ".dl-card", "details", ".steps li"];
   if ("IntersectionObserver" in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -545,6 +545,9 @@
   function go(hash) { return function () { document.querySelector(hash).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }; }
   function open_(url) { return function () { window.open(url, "_blank", "noopener"); }; }
   var commands = [
+    { icon: "🌐", label: "Open the web version", hint: "Link", run: open_("https://an0nym0us-glitch.github.io/Smart-board-web/") },
+    { icon: "🤖", label: "Get the Android app", hint: "Section", run: go("#platforms") },
+    { icon: "⬇", label: "Windows, web and Android", hint: "Section", run: go("#platforms") },
     { icon: "✨", label: "What's new in v0.3.1", hint: "Section", run: go("#new") },
     { icon: "📏", label: "Try the ribbon size", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var r = document.getElementById("rs"); if (r) r.focus({ preventScroll: true }); }, 500); } },
     { icon: "🧮", label: "Try the calculator", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var c = document.getElementById("calc"); if (c) c.focus({ preventScroll: true }); }, 500); } },
