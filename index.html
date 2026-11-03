@@ -25,7 +25,7 @@
   <!-- fonts load without blocking the first paint; system fonts stand in until they arrive -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-  <link rel="stylesheet" href="styles.css?v=0.3.1-2">
+  <link rel="stylesheet" href="styles.css?v=0.3.1-3">
   <script>
     try { var t = localStorage.getItem("cb-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
   </script>
@@ -236,19 +236,21 @@
             <span class="new-badge plat-badge">New</span>
             <div class="plat-ico"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><rect x="5" y="2.5" width="14" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 18.5h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
             <h3>Android</h3>
-            <p class="plat-sub">Android 7.0 or newer</p>
+            <p class="plat-sub">Android 7.0 or newer · v0.3.1 · 1 MB</p>
             <p>A native Android app for tablets, interactive panels and phones. It works fully offline.</p>
             <ol class="plat-steps">
-              <li>Sign in to GitHub and open the newest <b>Android APK</b> build</li>
-              <li>Download <b>ClassBoard-release-apk</b> under <b>Artifacts</b></li>
-              <li>Unzip it, open <code>app-release.apk</code> and allow installing</li>
+              <li>Tap <b>Download for Android</b> on the device</li>
+              <li>Open <code>ClassBoard-0.3.1.apk</code> and allow installing from this source when Android asks</li>
+              <li>Open <b>ClassBoard</b> from the app list. To update, install the new APK over the old one</li>
             </ol>
             <div class="plat-actions">
-              <a class="btn btn-primary" href="https://github.com/An0nym0us-glitch/Smart-board-for-android/actions/workflows/android.yml" target="_blank" rel="noopener">Get the Android APK</a>
+              <a class="btn btn-primary" href="downloads/ClassBoard-0.3.1.apk" download type="application/vnd.android.package-archive">Download for Android</a>
               <a class="plat-link" href="https://github.com/An0nym0us-glitch/Smart-board-for-android" target="_blank" rel="noopener">Source code</a>
             </div>
           </article>
         </div>
+        <p class="landscape-tip"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><rect x="3" y="7" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 4.5A8 8 0 0 1 17 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M15.5 2.5 17 4l-1.8 1.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> <span><b>Best in landscape.</b> ClassBoard's ribbon and board are made for a wide screen, so turn tablets and phones sideways, for the Android app and the web version alike. Interactive panels are landscape already.</span></p>
+        <p class="apk-check">Android APK SHA-256: <code>d97e1530cc7201969e58eaa76ee062d2d10924cfd20d4c7a1607b53cdee21263</code></p>
         <figure class="web-shot">
           <div class="window-bar"><i></i><i></i><i></i><span class="web-url">an0nym0us-glitch.github.io/Smart-board-web</span></div>
           <img src="assets/img/web-version.webp" alt="ClassBoard running in a web browser, with a line drawn on the board and the More menu open" width="1366" height="800" loading="lazy" decoding="async">
@@ -793,7 +795,11 @@ ctest --test-dir build --output-on-failure
         </details>
         <details>
           <summary>Is there an Android version?</summary>
-          <p>Yes, for Android 7.0 or newer (tablets, interactive panels and phones). Sign in to GitHub, open the newest <a href="https://github.com/An0nym0us-glitch/Smart-board-for-android/actions/workflows/android.yml" target="_blank" rel="noopener">Android APK build</a>, download <b>ClassBoard-release-apk</b> under Artifacts, unzip it and open <code>app-release.apk</code> on the device.</p>
+          <p>Yes, for Android 7.0 or newer (tablets, interactive panels and phones). <a href="downloads/ClassBoard-0.3.1.apk" download>Download ClassBoard-0.3.1.apk</a> (1 MB) on the device, open it and allow installing from this source when Android asks. Use it in landscape for the best fit.</p>
+        </details>
+        <details>
+          <summary>Should I use it in portrait or landscape?</summary>
+          <p>Landscape. The ribbon and the board are made for a wide screen, so on a tablet or phone turn the device sideways, in the Android app and in the web version. In portrait the ribbon gets crowded.</p>
         </details>
         <details>
           <summary>Can I move a lesson between Windows, the browser and Android?</summary>
@@ -856,6 +862,6 @@ ctest --test-dir build --output-on-failure
     </div>
   </dialog>
 
-  <script src="main.js?v=0.3.1-2"></script>
+  <script src="main.js?v=0.3.1-3"></script>
 </body>
 </html>

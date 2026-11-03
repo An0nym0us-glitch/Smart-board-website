@@ -546,7 +546,7 @@
   function open_(url) { return function () { window.open(url, "_blank", "noopener"); }; }
   var commands = [
     { icon: "🌐", label: "Open the web version", hint: "Link", run: open_("https://an0nym0us-glitch.github.io/Smart-board-web/") },
-    { icon: "🤖", label: "Get the Android app", hint: "Section", run: go("#platforms") },
+    { icon: "🤖", label: "Download the Android app (APK)", hint: "Download", run: function () { location.href = "downloads/ClassBoard-0.3.1.apk"; } },
     { icon: "⬇", label: "Windows, web and Android", hint: "Section", run: go("#platforms") },
     { icon: "✨", label: "What's new in v0.3.1", hint: "Section", run: go("#new") },
     { icon: "📏", label: "Try the ribbon size", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var r = document.getElementById("rs"); if (r) r.focus({ preventScroll: true }); }, 500); } },
