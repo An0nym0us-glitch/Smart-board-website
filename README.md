@@ -25,7 +25,7 @@ favicon.ico      app icon
 robots.txt, sitemap.xml   for search engines
 ```
 
-The download buttons link straight to the current installer (v0.3.1). When the page loads,
+The download buttons link straight to the current installer (v0.3.2). When the page loads,
 `main.js` asks the GitHub API for the latest release and, if it has a `*Setup*.exe` asset,
 points the buttons, version, size and release-notes link at that release instead.
 

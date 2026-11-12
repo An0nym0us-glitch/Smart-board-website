@@ -370,7 +370,7 @@
 
   // ---------- Latest release ----------
   // Point download buttons straight at the latest installer when the GitHub API answers.
-  // On any failure the links in the markup (the v0.3.0 installer) stay as they are.
+  // On any failure the links in the markup (the current installer) stay as they are.
   fetch("https://api.github.com/repos/" + REPO + "/releases/latest", { headers: { Accept: "application/vnd.github+json" } })
     .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
     .then(function (release) {
@@ -548,7 +548,7 @@
     { icon: "🌐", label: "Open the web version", hint: "Link", run: open_("https://an0nym0us-glitch.github.io/Smart-board-web/") },
     { icon: "🤖", label: "Download the Android app (APK)", hint: "Download", run: function () { location.href = "downloads/ClassBoard-0.3.1.apk"; } },
     { icon: "⬇", label: "Windows, web and Android", hint: "Section", run: go("#platforms") },
-    { icon: "✨", label: "What's new in v0.3.1", hint: "Section", run: go("#new") },
+    { icon: "✨", label: "What's new in v0.3.2", hint: "Section", run: go("#new") },
     { icon: "📏", label: "Try the ribbon size", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var r = document.getElementById("rs"); if (r) r.focus({ preventScroll: true }); }, 500); } },
     { icon: "🧮", label: "Try the calculator", hint: "Demo", run: function () { go("#new")(); setTimeout(function () { var c = document.getElementById("calc"); if (c) c.focus({ preventScroll: true }); }, 500); } },
     { icon: "★", label: "Features", hint: "Section", run: go("#features") },
