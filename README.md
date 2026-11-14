@@ -20,7 +20,6 @@ guides/          PDFs: "How to use ClassBoard" manual (full and compact), the Cl
                  colour for screens, and its ink-saver edition. All four include a chapter on the
                  web and Android versions (added on top of the app's docs/ PDFs).
 assets/img/      app screenshots and guide covers (WebP), logo, social preview image (og.jpg), touch icon
-downloads/       ClassBoard-<version>.apk, the Android app (release APK from the Android CI run)
 favicon.ico      app icon
 robots.txt, sitemap.xml   for search engines
 ```
@@ -39,10 +38,8 @@ When the app has a new release:
 
 The three versions live in separate repositories: the Windows app in `Smart-board`, the web
 version in `Smart-board-web` (published at an0nym0us-glitch.github.io/Smart-board-web) and the
-Android app in `Smart-board-for-android`. Its APK is copied from the "Android APK" Actions run
-(artifact `ClassBoard-release-apk`) into `downloads/`, so the website can offer a direct download;
-check its SHA-256 against the artifact digest, update the file name and SHA-256 in `index.html`
-and the link in the PDFs' Android chapter.
+Android app in `Smart-board-for-android`. The website links to its GitHub Release `latest`
+(`releases/download/latest/ClassBoard.apk`), so a new Android build needs no website change.
 
 ## Performance notes
 
